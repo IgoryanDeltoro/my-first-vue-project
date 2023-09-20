@@ -1,3 +1,3 @@
 <template>
-  <h1>My first title</h1>
+  <h1><slot></slot></h1>
 </template>
