@@ -1,24 +1,22 @@
 <template>
   <div class="body">
-    <Header >{{ title }}</Header>
-    <Button @click="increment" :disabled="isVisible" :outline="isVisible">Enter</Button>
-    <ul>
-      <template v-for="fruit in fruits" >
-        <li key="fruit" v-if="fruit==='kiwi'">{{ fruit }}</li>
-      </template>
-    </ul>
+    <Header>{{ title }}</Header>
+    <Button @click="increment" :outline="isVisible">Enter</Button>
+    <StarRating :rating="1.50"/>
   </div>
 </template>
 
 <script>
 import Button from './components/Button.vue';
 import Header from './components/Header.vue';
+import StarRating from './components/StarRating.vue';
 
 export default {
   name: 'Body',
   components: {
     Header,
     Button,
+    StarRating,
   },
   data() {
     return {
