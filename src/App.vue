@@ -1,31 +1,20 @@
 <template>
-  <div class="body">
-    <ApartmentsItem
-      :description="apartment.description"
-      :price="apartment.price"
-      :rating="apartment.rating"
-      :imgSrc="apartment.imgSrc"
-    />
+  <div class="app">
+    <ApartmentsList :apartments="apartments" />
   </div>
 </template>
 
 <script>
-import ApartmentsItem from './components/apartments/index';
-import image from '../public/image/Rectangle 42.jpg';
+import apartments from './components/apartment/apartments';
+import ApartmentsList from './components/apartment/ApartmentsList.vue';
 export default {
-  name: 'Body',
+  name: 'App',
   components: {
-    ApartmentsItem,
+    ApartmentsList,
   },
   data() {
     return {
-      apartment: {
-        description:
-          'Роскошные апартаменты в скайндинавском стиле с панорамным видом на реку и бесплатным Wi-Fi.',
-        rating: 4,
-        price: 1500,
-        imgSrc: image,
-      },
+      apartments,
     };
   },
   computed: {},
@@ -34,7 +23,7 @@ export default {
 </script>
 
 <style>
-body {
+.app {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
@@ -42,8 +31,4 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-
-/* .content {
-  flex-grow: 1;
-} */
 </style>
