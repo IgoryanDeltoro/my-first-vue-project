@@ -52,10 +52,13 @@ export default {
 }
 .apartment-item__inner {
   position: relative;
+  width: 100%;
+  height: 100%;
 }
 .apartment-item__img {
   width: 100%;
   height: 100%;
+  object-fit: cover;
 }
 .apartment-item__content {
   position: absolute;
@@ -64,7 +67,7 @@ export default {
   text-align: left;
   line-height: 1.2;
   background: rgba(15, 29, 45, 0.7);
-  cursor: pointer;  
+  cursor: pointer;
   opacity: 0;
   top: 0;
   left: 0;
@@ -79,6 +82,8 @@ export default {
   font-weight: 500;
   margin-bottom: 20px;
   line-height: 1.2;
+  height: calc(1em * 1.2 * 4);
+  overflow: hidden;
 }
 .apartment-item__rating {
   margin-bottom: 20px;
