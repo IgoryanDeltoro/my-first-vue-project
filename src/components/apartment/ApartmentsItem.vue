@@ -49,6 +49,16 @@ export default {
 .apartment-item {
   max-width: 350px;
   height: 196px;
+  margin-right: 30px;
+  margin-bottom: 30px;
+  flex-basis: calc((100% - 60px) / 3);
+
+  &:nth-child(3n) {
+    margin-right: 0;
+  }
+  &:nth-last-child(-n + 3) {
+    margin-bottom: 0;
+  }
 }
 .apartment-item__inner {
   position: relative;
