@@ -1,5 +1,9 @@
 <template>
   <div class="app">
+    <p>{{ text }}</p>
+<CustomInput type="text" name="name" v-model="text" />
+<CustomInput type="text" name="email" v-model="name" />
+
     <ApartmentsList :items="apartments">
       <template v-slot:title>Selection according to choice</template>
       <template v-slot:apartment="{ apartment }">
@@ -9,6 +13,7 @@
           :rating="apartment.rating"
           :imgSrc="apartment.imgUrl"
           :key="apartment.id"
+          @click="handler"
         />
       </template>
     </ApartmentsList>
@@ -19,19 +24,28 @@
 import apartments from './components/apartment/apartments';
 import ApartmentsItem from './components/apartment/ApartmentsItem.vue';
 import ApartmentsList from './components/apartment/ApartmentsList.vue';
+import CustomInput from './components/shared/CustomInput.vue';
+
 export default {
   name: 'App',
   components: {
     ApartmentsList,
     ApartmentsItem,
-  },
+    CustomInput
+},
   data() {
     return {
+      text: '',
+      name:'',
       apartments,
     };
   },
   computed: {},
-  methods: {},
+  methods: {
+    handler(event) {
+      console.log(event.target.tagName);
+    },
+  },
 };
 </script>
 
