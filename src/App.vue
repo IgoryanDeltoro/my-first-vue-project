@@ -1,8 +1,13 @@
 <template>
   <div class="app">
     <p>{{ text }}</p>
-<CustomInput type="text" name="name" v-model="text" />
-<CustomInput type="text" name="email" v-model="name" />
+    <CustomInput
+      type="text"
+      name="name"
+      v-model="text"
+      :placeholder="'Price, from'"
+    />
+    <CustomSelect :items="['Country', 'City']" />
 
     <ApartmentsList :items="apartments">
       <template v-slot:title>Selection according to choice</template>
@@ -25,18 +30,20 @@ import apartments from './components/apartment/apartments';
 import ApartmentsItem from './components/apartment/ApartmentsItem.vue';
 import ApartmentsList from './components/apartment/ApartmentsList.vue';
 import CustomInput from './components/shared/CustomInput.vue';
+import CustomSelect from './components/shared/CustomSelect.vue';
 
 export default {
   name: 'App',
   components: {
     ApartmentsList,
     ApartmentsItem,
-    CustomInput
-},
+    CustomInput,
+    CustomSelect,
+  },
   data() {
     return {
       text: '',
-      name:'',
+      name: '',
       apartments,
     };
   },
@@ -54,8 +61,5 @@ export default {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  font-family: 'Montserrat', sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
 }
 </style>
