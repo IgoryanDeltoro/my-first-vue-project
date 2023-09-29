@@ -14,14 +14,18 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "../../assets/scss/variables.scss";
+@import '../../assets/scss/variables.scss';
 .custom-input {
-  width: 349px;
+  width: 220px;
   height: 44px;
   border: 2px solid $main-color;
-  background: #fff;
+  background: $white-color;
   line-height: inherit;
   outline: none;
-  padding: 8px, 15px;
+  padding: 11px 20px 11px 20px;
+  font-family: inherit;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 1.2;
 }
 </style>
