@@ -1,0 +1,14 @@
+* {
+    box-sizing: border-box;
+
+    &::after,
+    &::before {
+        box-sizing: inherit;
+    }
+}
+
+body {
+    font-family: 'Montserrat', medium;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
