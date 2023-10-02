@@ -27,5 +27,9 @@ export default {
   font-size: 18px;
   font-weight: 400;
   line-height: 1.2;
+
+  &::placeholder {
+    color: inherit;
+  }
 }
 </style>

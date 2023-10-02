@@ -1,14 +1,6 @@
 <template>
   <div class="app">
-    <p>{{ text }}</p>
-    <CustomInput
-      type="text"
-      name="name"
-      v-model="text"
-      :placeholder="'Price, from'"
-    />
-    <CustomSelect :items="['Country', 'City']" />
-
+  <ApartmentsFilterForm @submit="logger"/>
     <ApartmentsList :items="apartments">
       <template v-slot:title>Selection according to choice</template>
       <template v-slot:apartment="{ apartment }">
@@ -18,7 +10,6 @@
           :rating="apartment.rating"
           :imgSrc="apartment.imgUrl"
           :key="apartment.id"
-          @click="handler"
         />
       </template>
     </ApartmentsList>
@@ -27,6 +18,7 @@
 
 <script>
 import apartments from './components/apartment/apartments';
+import ApartmentsFilterForm from './components/apartment/ApartmentsFilterForm.vue';
 import ApartmentsItem from './components/apartment/ApartmentsItem.vue';
 import ApartmentsList from './components/apartment/ApartmentsList.vue';
 import CustomInput from './components/shared/CustomInput.vue';
@@ -39,7 +31,8 @@ export default {
     ApartmentsItem,
     CustomInput,
     CustomSelect,
-  },
+    ApartmentsFilterForm
+},
   data() {
     return {
       text: '',
@@ -49,8 +42,8 @@ export default {
   },
   computed: {},
   methods: {
-    handler(event) {
-      console.log(event.target.tagName);
+    logger(value) {
+      console.log(value);
     },
   },
 };

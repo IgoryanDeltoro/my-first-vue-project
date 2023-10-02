@@ -1,5 +1,5 @@
 <template>
-  <button v-bind:type="type" :class="{ btn: true, 'btn--outline': outline }">
+  <button :type="type" :class="{ btn: true, 'btn--outline': outline }">
     <slot></slot>
   </button>
 </template>
@@ -22,8 +22,8 @@ export default {
 
 <style lang="scss" scoped>
 .btn {
-  width: 349px;
-  height: 48.563px;
+  width: 220px;
+  height: 44px;
   background: #ff662d;
   color: #fff;
   text-align: center;
