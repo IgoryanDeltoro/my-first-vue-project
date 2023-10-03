@@ -1,12 +1,7 @@
 <template>
   <Container>
     <form @submit.prevent="handelSubmit" type="submit" class="form">
-      <CustomSelect
-        class="form__select"
-        :items="['Country', 'City']"
-        v-model="city"
-      />
-
+      <CustomSelect class="form__select" :items="cities" v-model="city" />
       <CustomInput
         class="form__input"
         name="name"
@@ -23,6 +18,7 @@ import Button from '../Button.vue';
 import Container from '../shared/Container.vue';
 import CustomInput from '../shared/CustomInput.vue';
 import CustomSelect from '../shared/CustomSelect.vue';
+import citiesNames from './citiesNames';
 
 export default {
   name: 'ApartmentsFilterForm',
@@ -34,9 +30,14 @@ export default {
   },
   data() {
     return {
-      price: 0,
+      price: '',
       city: '',
     };
+  },
+  computed: {
+    cities() {
+      return [{ value: '', label: 'City', selected: true }, ...citiesNames];
+    },
   },
   methods: {
     handelSubmit() {
@@ -57,7 +58,6 @@ export default {
 
   &__input {
     margin-right: auto;
-
   }
 }
 </style>
