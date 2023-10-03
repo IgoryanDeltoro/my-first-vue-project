@@ -1,9 +1,10 @@
 <template>
-  <select v-on="listeners" class="custom-select">
+  <select v-model="selected" class="custom-select">
     <option
       v-for="item in formattedItems"
       :value="item.value"
       :key="item.value"
+      :selected="item.selected"
     >
       {{ item.label }}
     </option>
@@ -19,12 +20,12 @@ export default {
       required: true,
     },
   },
+  data() {
+    return {
+      selected: '',
+    };
+  },
   computed: {
-    listeners() {
-      return {
-        input: event => this.$emit('input', event.target.value),
-      };
-    },
     formattedItems() {
       return this.items.map(item => {
         if (typeof item === 'object') {
