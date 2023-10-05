@@ -1,7 +1,11 @@
 <template>
   <div class="app">
-  <ApartmentsFilterForm @submit="logger"/>
-    <ApartmentsList :items="apartments">
+    <ApartmentsFilterForm @submit="filter" />
+    <p class="inform" v-if="!filteredApartments.length">Apartments not found</p>
+    <ApartmentsList
+      v-else="filteredApartments.length"
+      :items="filteredApartments"
+    >
       <template v-slot:title>Selection according to choice</template>
       <template v-slot:apartment="{ apartment }">
         <ApartmentsItem
@@ -31,19 +35,41 @@ export default {
     ApartmentsItem,
     CustomInput,
     CustomSelect,
-    ApartmentsFilterForm
-},
+    ApartmentsFilterForm,
+  },
   data() {
     return {
-      text: '',
-      name: '',
       apartments,
+      filters: {
+        city: '',
+        price: 0,
+      },
     };
   },
-  computed: {},
+  computed: {
+    filteredApartments() {
+      return this.filterByCityName(this.filterByPrice(this.apartments));
+    },
+  },
+
   methods: {
-    logger(value) {
-      console.log(value);
+    filter({ city, price }) {
+      this.filters.city = city;
+      this.filters.price = price;
+    },
+    filterByCityName(apartments) {
+      return apartments.filter(apartment => {
+        if (!this.filters.city) return apartments;
+
+        return apartment.location.city === this.filters.city;
+      });
+    },
+    filterByPrice(apartments) {
+      return apartments.filter(apartment => {
+        if (!this.filters.price) return apartments;
+
+        return apartment.price >= this.filters.price;
+      });
     },
   },
 };
@@ -54,5 +80,10 @@ export default {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+}
+.inform {
+  color: red;
+  text-align: center;
+  font-size: large;
 }
 </style>
