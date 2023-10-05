@@ -30,12 +30,16 @@ export default {
   font-family: Montserrat Medium;
   font-size: 18px;
   border: none;
+  cursor: pointer;
+  
+  &:hover {
+    background: #e84a11;
+  }
 
   &--outline {
     background: #fff;
     color: #ff662d;
-  border: 1px solid #ff662d;
-
+    border: 1px solid #ff662d;
   }
 }
 </style>
