@@ -1,6 +1,6 @@
 <template>
   <Container>
-    <form @submit.prevent="handelSubmit" type="submit" class="form">
+    <form @submit.prevent.stop="handelSubmit" type="submit" class="form">
       <CustomSelect class="form__select" :items="cities" v-model="city" />
       <CustomInput
         class="form__input"
