@@ -1,21 +1,18 @@
 <template>
-  <Container>
-    <form @submit.prevent.stop="handelSubmit" type="submit" class="form">
-      <CustomSelect class="form__select" :items="cities" v-model="city" />
-      <CustomInput
-        class="form__input"
-        name="name"
-        v-model="price"
-        :placeholder="'Price, from'"
-      />
-      <Button type="submit" :outline="false">Selection of house</Button>
-    </form>
-  </Container>
+  <form @submit.prevent="handelSubmit" class="form">
+    <CustomSelect class="form__select" :items="cities" v-model="city" />
+    <CustomInput
+      class="form__input"
+      name="name"
+      v-model="price"
+      :placeholder="'Price, from'"
+    />
+    <Button type="submit" :outline="false">Selection of house</Button>
+  </form>
 </template>
 
 <script>
 import Button from '../Button.vue';
-import Container from '../shared/Container.vue';
 import CustomInput from '../shared/CustomInput.vue';
 import CustomSelect from '../shared/CustomSelect.vue';
 import citiesNames from './citiesNames';
@@ -26,7 +23,6 @@ export default {
     CustomSelect,
     CustomInput,
     Button,
-    Container,
   },
   data() {
     return {
@@ -41,7 +37,7 @@ export default {
   },
   methods: {
     handelSubmit() {
-      this.$emit('submit', { price: this.price, city: this.city });
+      this.$emit('data', { price: this.price, city: this.city });
     },
   },
 };
