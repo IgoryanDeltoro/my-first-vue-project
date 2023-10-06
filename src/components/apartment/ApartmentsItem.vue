@@ -47,7 +47,7 @@ export default {
 
 <style lang="scss" scoped>
 .apartment-item {
-  max-width: 350px;
+  width: 350px;
   height: 196px;
   margin-right: 30px;
   margin-bottom: 30px;
