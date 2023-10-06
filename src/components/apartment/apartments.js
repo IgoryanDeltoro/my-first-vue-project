@@ -8,7 +8,7 @@ export default [
     rating: 3,
     price: 1667,
     location: {
-      city: 'Amsterdam',
+      city: 'Dnipro',
     },
     owner: {
       name: 'Bobbi',
@@ -25,7 +25,7 @@ export default [
     rating: 3,
     price: 2740,
     location: {
-      city: 'Berlin',
+      city: 'Poltava',
     },
     owner: {
       name: 'Leonor',
@@ -42,7 +42,7 @@ export default [
     rating: 1,
     price: 2153,
     location: {
-      city: 'Kyiv',
+      city: 'Kharkiv',
     },
     owner: {
       name: 'Fanny',
@@ -59,7 +59,7 @@ export default [
     rating: 3,
     price: 3074,
     location: {
-      city: 'Athens',
+      city: 'Poltava',
     },
     owner: {
       name: 'Wyman',
