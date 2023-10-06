@@ -1,22 +1,34 @@
 <template>
   <div class="app">
-    <ApartmentsFilterForm @submit="filter" />
-    <p class="inform" v-if="!filteredApartments.length">Apartments not found</p>
-    <ApartmentsList
-      v-else="filteredApartments.length"
-      :items="filteredApartments"
-    >
-      <template v-slot:title>Selection according to choice</template>
-      <template v-slot:apartment="{ apartment }">
-        <ApartmentsItem
-          :description="apartment.descr"
-          :price="apartment.price"
-          :rating="apartment.rating"
-          :imgSrc="apartment.imgUrl"
-          :key="apartment.id"
-        />
-      </template>
-    </ApartmentsList>
+    <div class="content">
+      <Header />
+      <Container>
+        <ApartmentsFilterForm @data="filter" />
+      </Container>
+      <Container>
+        <p class="inform" v-if="!filteredApartments.length">
+          Apartments not found
+        </p>
+        <ApartmentsList
+          v-else="filteredApartments.length"
+          :items="filteredApartments"
+        >
+          <template v-slot:title
+            ><h1 class="title">Selection according to choice</h1>
+          </template>
+          <template v-slot:apartment="{ apartment }">
+            <ApartmentsItem
+              :description="apartment.descr"
+              :price="apartment.price"
+              :rating="apartment.rating"
+              :imgSrc="apartment.imgUrl"
+              :key="apartment.id"
+            />
+          </template>
+        </ApartmentsList>
+      </Container>
+    </div>
+    <Footer />
   </div>
 </template>
 
@@ -25,6 +37,9 @@ import apartments from './components/apartment/apartments';
 import ApartmentsFilterForm from './components/apartment/ApartmentsFilterForm.vue';
 import ApartmentsItem from './components/apartment/ApartmentsItem.vue';
 import ApartmentsList from './components/apartment/ApartmentsList.vue';
+import Footer from './components/Footer.vue';
+import Header from './components/Header.vue';
+import Container from './components/shared/Container.vue';
 import CustomInput from './components/shared/CustomInput.vue';
 import CustomSelect from './components/shared/CustomSelect.vue';
 
@@ -36,6 +51,9 @@ export default {
     CustomInput,
     CustomSelect,
     ApartmentsFilterForm,
+    Footer,
+    Header,
+    Container,
   },
   data() {
     return {
@@ -79,11 +97,22 @@ export default {
 .app {
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
+  height: 100vh;
 }
 .inform {
   color: red;
   text-align: center;
   font-size: large;
+}
+.title {
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 1.4;
+  margin-bottom: 20px;
+}
+.content {
+  flex-grow: 1;
+  margin-bottom: 100px;
+  padding-top: 120px;
 }
 </style>
