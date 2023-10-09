@@ -5,12 +5,16 @@
       <div class="apartment-item__content">
         <p class="apartment-item__description">{{ description }}</p>
         <div class="apartment-item__rating">
-          <StarRating :rating="4" />
+          <StarRating :rating="rating" />
         </div>
         <p class="apartment-item__price">
           UAH {{ price }}
           <span class="apartment-item__price--desc">per day</span>
         </p>
+        <router-link
+          :to="{ name: 'apartment', params: { id } }"
+          class="apartment-link"
+        ></router-link>
       </div>
     </div>
   </div>
@@ -40,6 +44,10 @@ export default {
     imgSrc: {
       type: String,
       default: '',
+    },
+    id: {
+      type: String,
+      required: true,
     },
   },
 };
@@ -107,5 +115,12 @@ export default {
   &--desc {
     font-weight: 500;
   }
+}
+.apartment-link {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
 }
 </style>
