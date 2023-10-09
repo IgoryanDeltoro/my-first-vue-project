@@ -29,7 +29,7 @@ export default {
 }
 .content {
   flex-grow: 1;
-  margin-bottom: 100px;
   padding-top: 120px;
+  padding-bottom: 100px;
 }
 </style>
