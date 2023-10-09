@@ -22,6 +22,7 @@ export default {
 
 <style lang="scss" scoped>
 .btn {
+  display: block;
   width: 220px;
   height: 44px;
   background: #ff662d;
@@ -31,7 +32,7 @@ export default {
   font-size: 18px;
   border: none;
   cursor: pointer;
-  
+
   &:hover {
     background: #e84a11;
   }
