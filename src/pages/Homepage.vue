@@ -20,6 +20,7 @@
             :price="apartment.price"
             :rating="apartment.rating"
             :imgSrc="apartment.imgUrl"
+            :id="apartment.id"
             :key="apartment.id"
           />
         </template>
