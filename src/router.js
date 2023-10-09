@@ -1,15 +1,23 @@
 import { createRouter, createWebHistory } from 'vue-router';
-import Apartment from './pages/Apartment.vue';
+import ApartmentPage from './pages/ApartmentPage.vue';
 import Homepage from './pages/Homepage.vue';
+import ErrorPage from './pages/ErrorPage.vue';
 
 const routes = [
   {
     path: '/',
     component: Homepage,
+    name: 'homepage',
   },
   {
-    path: '/apartment',
-    component: Apartment,
+    path: '/apartment/:id',
+    component: ApartmentPage,
+    name: 'apartment',
+  },
+  {
+    path: "/:catchAll(.*)",
+    component: ErrorPage,
+    name: 'error-page',
   },
 ];
 
