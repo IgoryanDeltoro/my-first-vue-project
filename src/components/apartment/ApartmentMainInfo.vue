@@ -36,14 +36,16 @@ export default {
   width: 730px;
 
   &__title {
+    max-width: calc(100% - 120px);
     font-size: 20px;
     font-weight: 700;
     line-height: 1.2;
     margin-right: 20px;
   }
+
   &__content {
     display: flex;
-    align-items: center;
+    align-items: baseline;
     margin-bottom: 20px;
   }
   &__img {
