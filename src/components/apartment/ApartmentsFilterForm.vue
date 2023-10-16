@@ -15,7 +15,7 @@
 import Button from '../Button.vue';
 import CustomInput from '../shared/CustomInput.vue';
 import CustomSelect from '../shared/CustomSelect.vue';
-import citiesNames from './citiesNames';
+import { getCities } from '../../services/apartment.service';
 
 export default {
   name: 'ApartmentsFilterForm',
@@ -26,13 +26,22 @@ export default {
   },
   data() {
     return {
+      cities: [],
       price: '',
       city: '',
     };
   },
+  async created() {
+    try {
+      const { data } = await getCities();
+      this.cities = data;
+    } catch (error) {
+      console.log(error);
+    }
+  },
   computed: {
     cities() {
-      return [{ value: '', label: 'City', selected: true }, ...citiesNames];
+      return [{ value: '', label: 'City', selected: true }, ...this.cities];
     },
   },
   methods: {

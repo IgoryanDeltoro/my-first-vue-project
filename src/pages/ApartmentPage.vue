@@ -1,7 +1,8 @@
 <template>
   <main>
     <Container>
-      <div class="apartment-page">
+      <Loading v-if="isLoading" />
+      <div v-else="!isLoading" class="apartment-page">
         <ApartmentMainInfo :apartment="apartment" />
         <div class="apartment-page__additional-info">
           <ApartmentsOwner
@@ -18,10 +19,11 @@
 <script>
 import Container from '../components/shared/Container.vue';
 import ApartmentMainInfo from '../components/apartment/ApartmentMainInfo.vue';
-import apartments from '../components/apartment/apartments';
 import ApartmentsOwner from '../components/apartment/ApartmentsOwner.vue';
 import Reviews from '../components/reviews/Reviews.vue';
 import reviews from '../components/reviews/reviews.json';
+import Loading from '../components/Loading.vue';
+import { getApartmentById } from '../services/apartment.service';
 export default {
   name: 'ApartmentPage',
   components: {
@@ -29,15 +31,28 @@ export default {
     ApartmentMainInfo,
     ApartmentsOwner,
     Reviews,
+    Loading,
+  },
+  data() {
+    return {
+      isLoading: false,
+      apartment: {},
+    };
+  },
+  async created() {
+    try {
+      this.isLoading = true;
+      const { id } = this.$route.params;
+      const { data } = await getApartmentById(id);
+      this.apartment = data;
+      this.isLoading = false;
+    } catch (error) {
+      console.log(error);
+    }
   },
   computed: {
     reviews() {
       return reviews;
-    },
-    apartment() {
-      return apartments.find(
-        apartment => apartment.id === this.$route.params.id
-      );
     },
   },
 };
@@ -48,7 +63,7 @@ export default {
   display: flex;
   align-items: flex-start;
 
-  &__owner{
+  &__owner {
     margin-bottom: 20px;
   }
 
