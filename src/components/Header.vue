@@ -17,7 +17,6 @@ export default {
   components: {
     Logo,
     Container,
-    RouterLink,
   },
 };
 </script>
