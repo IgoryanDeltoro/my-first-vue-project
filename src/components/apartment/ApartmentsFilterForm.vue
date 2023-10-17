@@ -5,7 +5,9 @@
       class="form__input"
       name="name"
       v-model="price"
+      error-message="this field is empty"
       :placeholder="'Price, from'"
+      :rules="[(val) =>!!val]"
     />
     <Button type="submit" :outline="false">Selection of house</Button>
   </form>
