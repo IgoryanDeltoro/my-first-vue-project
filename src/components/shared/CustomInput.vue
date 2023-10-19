@@ -6,7 +6,7 @@
       v-bind="$attrs"
       v-model="value"
     />
-    <span v-if="!isValid" class="custom-input__error">{{ errorMessage }}</span>
+    <span v-if="!isValid" class="custom-input__error">{{ error }}</span>
   </div>
 </template>
 
@@ -17,8 +17,10 @@ export default {
     return {
       value: '',
       isValid: true,
+      error: '',
     };
   },
+  inheritAttrs: false,
   props: {
     errorMessage: {
       type: String,
@@ -36,7 +38,15 @@ export default {
   },
   methods: {
     validate(value) {
-      this.isValid = this.rules.every(rule => rule(value));
+      this.isValid = this.rules.every(rule => {
+        const { hasPassed, message } = rule(value);
+
+        if (!hasPassed) {
+          this.error = message || this.errorMessage;
+        }
+
+        return hasPassed;
+      });
     },
   },
 };
@@ -46,6 +56,7 @@ export default {
 @import '../../assets/scss/variables.scss';
 .wrapper-input {
   position: relative;
+  display: inline-flex;
 }
 .custom-input {
   width: 220px;

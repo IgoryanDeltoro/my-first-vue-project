@@ -4,12 +4,15 @@
     <CustomInput
       class="form__input"
       name="name"
+      type="number"
       v-model="price"
       error-message="this field is empty"
       :placeholder="'Price, from'"
-      :rules="[(val) =>!!val]"
+      :rules="rules"
     />
-    <Button type="submit" :outline="false">Selection of house</Button>
+    <Button class="form__button" type="submit" :outline="false"
+      >Selection of house</Button
+    >
   </form>
 </template>
 
@@ -18,7 +21,7 @@ import Button from '../Button.vue';
 import CustomInput from '../shared/CustomInput.vue';
 import CustomSelect from '../shared/CustomSelect.vue';
 import { getCities } from '../../services/apartment.service';
-
+import { isRequired, charLimit } from '../../utils/validationRules';
 export default {
   name: 'ApartmentsFilterForm',
   components: {
@@ -36,14 +39,18 @@ export default {
   async created() {
     try {
       const { data } = await getCities();
-      this.cities = data;
+      this.cities = [{ value: '', label: 'City', selected: true }, ...data];
     } catch (error) {
       console.log(error);
     }
   },
+
   computed: {
-    cities() {
-      return [{ value: '', label: 'City', selected: true }, ...this.cities];
+    // cities() {
+    //   return [{ value: '', label: 'City', selected: true }, ...this?.cities];
+    // },
+    rules() {
+      return [isRequired, charLimit(5)];
     },
   },
   methods: {
@@ -63,8 +70,11 @@ export default {
     margin-right: 30px;
   }
 
-  &__input {
-    margin-right: auto;
+  &__button {
+    margin-left: auto;
   }
+}
+.form__input {
+  margin-right: auto;
 }
 </style>
