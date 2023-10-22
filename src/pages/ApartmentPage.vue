@@ -9,7 +9,7 @@
             class="apartment-page__owner"
             :owner="apartment.owner"
           />
-          <Reviews :reviews="reviews" />
+          <Reviews :reviews="apartment.reviews" />
         </div>
       </div>
     </Container>
@@ -20,8 +20,7 @@
 import Container from '../components/shared/Container.vue';
 import ApartmentMainInfo from '../components/apartment/ApartmentMainInfo.vue';
 import ApartmentsOwner from '../components/apartment/ApartmentsOwner.vue';
-import Reviews from '../components/reviews/Reviews.vue';
-import reviews from '../components/reviews/reviews.json';
+import Reviews from '../components/reviews/Index.vue';
 import Loading from '../components/Loading.vue';
 import { getApartmentById } from '../services/apartment.service';
 export default {
