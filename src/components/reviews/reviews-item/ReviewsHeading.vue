@@ -35,6 +35,7 @@ export default {
     margin-left: 20px;
   }
   &__author {
+    display: block;
     margin-bottom: 2px;
   }
 }
