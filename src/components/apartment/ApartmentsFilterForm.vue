@@ -46,9 +46,6 @@ export default {
   },
 
   computed: {
-    // cities() {
-    //   return [{ value: '', label: 'City', selected: true }, ...this?.cities];
-    // },
     rules() {
       return [isRequired, charLimit(5)];
     },
