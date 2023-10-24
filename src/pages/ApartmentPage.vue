@@ -20,7 +20,7 @@
 import Container from '../components/shared/Container.vue';
 import ApartmentMainInfo from '../components/apartment/ApartmentMainInfo.vue';
 import ApartmentsOwner from '../components/apartment/ApartmentsOwner.vue';
-import Reviews from '../components/reviews/Index.vue';
+import Reviews from '../components/reviews/index.vue';
 import Loading from '../components/Loading.vue';
 import { getApartmentById } from '../services/apartment.service';
 export default {

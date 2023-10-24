@@ -22,7 +22,7 @@
 
 <script>
 import StarRating from '../StarRating.vue';
-import ReviewsItem from './reviews-item/Index.vue';
+import ReviewsItem from './reviews-item/index.vue';
 export default {
   name: 'Reviews',
   components: {
