@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router';
 import ApartmentPage from './pages/ApartmentPage.vue';
 import Homepage from './pages/Homepage.vue';
 import ErrorPage from './pages/ErrorPage.vue';
+import LoginPage from './pages/LoginPage.vue';
 
 const routes = [
   {
@@ -15,7 +16,12 @@ const routes = [
     name: 'apartment',
   },
   {
-    path: "/:catchAll(.*)",
+    path: '/login',
+    component: LoginPage,
+    name: 'login-page',
+  },
+  {
+    path: '/:catchAll(.*)',
     component: ErrorPage,
     name: 'error-page',
   },
