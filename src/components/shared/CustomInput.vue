@@ -21,6 +21,7 @@ export default {
     };
   },
   inheritAttrs: false,
+  inject: ['form'],
   props: {
     errorMessage: {
       type: String,
@@ -31,22 +32,37 @@ export default {
       default: () => [],
     },
   },
+  mounted() {
+    if (!this.form) return;
+
+    this.form.registerInput(this);
+  },
+  beforeDestroy() {
+    if (!this.form) return;
+
+    this.form.unRegisterInput(this);
+  },
   watch: {
-    value(value) {
-      this.validate(value);
+    value() {
+      this.validate();
     },
   },
   methods: {
-    validate(value) {
+    validate() {
       this.isValid = this.rules.every(rule => {
-        const { hasPassed, message } = rule(value);
+        const { hasPassed, message } = rule(this.value);
 
         if (!hasPassed) {
           this.error = message || this.errorMessage;
         }
-
         return hasPassed;
       });
+
+      return this.isValid;
+    },
+    reset() {
+      // this.$emit('input', '');
+      this.value = '';
     },
   },
 };
