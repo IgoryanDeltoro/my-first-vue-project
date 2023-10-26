@@ -1,18 +1,20 @@
 <template>
   <main>
-    <Container>
-      <Loading v-if="isLoading" />
-      <div v-else="!isLoading" class="apartment-page">
-        <ApartmentMainInfo :apartment="apartment" />
-        <div class="apartment-page__additional-info">
-          <ApartmentsOwner
-            class="apartment-page__owner"
-            :owner="apartment.owner"
-          />
-          <Reviews :reviews="apartment.reviews" />
+    <SectionWithHeaderFooterSpaces>
+      <Container>
+        <Loading v-if="isLoading" />
+        <div v-else="!isLoading" class="apartment-page">
+          <ApartmentMainInfo :apartment="apartment" />
+          <div class="apartment-page__additional-info">
+            <ApartmentsOwner
+              class="apartment-page__owner"
+              :owner="apartment.owner"
+            />
+            <Reviews :reviews="apartment.reviews" />
+          </div>
         </div>
-      </div>
-    </Container>
+      </Container>
+    </SectionWithHeaderFooterSpaces>
   </main>
 </template>
 
@@ -23,6 +25,7 @@ import ApartmentsOwner from '../components/apartment/ApartmentsOwner.vue';
 import Reviews from '../components/reviews/index.vue';
 import Loading from '../components/Loading.vue';
 import { getApartmentById } from '../services/apartment.service';
+import SectionWithHeaderFooterSpaces from '../components/shared/SectionWithHeader&FooterSpaces.vue';
 export default {
   name: 'ApartmentPage',
   components: {
@@ -31,6 +34,7 @@ export default {
     ApartmentsOwner,
     Reviews,
     Loading,
+    SectionWithHeaderFooterSpaces,
   },
   data() {
     return {
