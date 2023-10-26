@@ -1,6 +1,8 @@
 <template>
   <section class="apartments-owner">
-    <h2 class="apartments-owner__title">Information about owner</h2>
+    <MainTitle class="apartments-owner__title" :level="2"
+      >Information about owner</MainTitle
+    >
     <ul class="apartments-owner__list">
       <li class="apartments-owner__item">
         <p class="apartments-owner__descr">Name: {{ owner.name }}</p>
@@ -23,6 +25,8 @@
 </template>
 
 <script>
+import MainTitle from '../shared/MainTitle.vue';
+
 export default {
   name: 'ApartmentsOwner',
   props: {
@@ -31,6 +35,7 @@ export default {
       required: true,
     },
   },
+  components: { MainTitle },
 };
 </script>
 

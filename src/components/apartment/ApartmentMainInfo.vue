@@ -1,7 +1,7 @@
 <template>
   <article class="article">
     <div class="article__content">
-      <h1 class="article__title">{{ apartment.title }}</h1>
+    <MainTitle class="article__title">{{ apartment.title }}</MainTitle>
       <StarRating :rating="apartment.rating" />
     </div>
     <img class="article__img" :src="apartment.imgUrl" alt="apartment" />
@@ -14,6 +14,7 @@
 import StarRating from '../StarRating.vue';
 import Container from '../shared/Container.vue';
 import Button from '../Button.vue';
+import MainTitle from '../shared/MainTitle.vue';
 
 export default {
   name: 'ApartmentMainInfo',
@@ -21,7 +22,8 @@ export default {
     Container,
     StarRating,
     Button,
-  },
+    MainTitle
+},
   props: {
     apartment: {
       type: Object,
@@ -62,6 +64,7 @@ export default {
   &__btn {
     margin-left: auto;
     margin-right: auto;
+    width: 220px;
   }
 }
 </style>

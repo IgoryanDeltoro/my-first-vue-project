@@ -1,31 +1,35 @@
 <template>
   <main class="homepage">
-    <Container>
-      <ApartmentsFilterForm @data="filter" />
-    </Container>
-    <Container>
-      <p class="inform" v-if="!filteredApartments.length">
-        Apartments not found
-      </p>
-      <ApartmentsList
-        v-else="filteredApartments.length"
-        :items="filteredApartments"
-      >
-        <template v-slot:title
-          ><h1 class="title">Selection according to choice</h1>
-        </template>
-        <template v-slot:apartment="{ apartment }">
-          <ApartmentsItem
-            :description="apartment.descr"
-            :price="apartment.price"
-            :rating="apartment.rating"
-            :imgSrc="apartment.imgUrl"
-            :id="apartment.id"
-            :key="apartment.id"
-          />
-        </template>
-      </ApartmentsList>
-    </Container>
+    <SectionWithHeaderFooterSpaces>
+      <Container>
+        <ApartmentsFilterForm @data="filter" />
+      </Container>
+      <Container>
+        <p class="homepage__inform" v-if="!filteredApartments.length">
+          Apartments not found
+        </p>
+        <ApartmentsList
+          v-else="filteredApartments.length"
+          :items="filteredApartments"
+        >
+          <template v-slot:title>
+            <MainTitle class="homepage__title"
+              >Selection according to choice</MainTitle
+            >
+          </template>
+          <template v-slot:apartment="{ apartment }">
+            <ApartmentsItem
+              :description="apartment.descr"
+              :price="apartment.price"
+              :rating="apartment.rating"
+              :imgSrc="apartment.imgUrl"
+              :id="apartment.id"
+              :key="apartment.id"
+            />
+          </template>
+        </ApartmentsList>
+      </Container>
+    </SectionWithHeaderFooterSpaces>
   </main>
 </template>
 <script>
@@ -34,6 +38,8 @@ import ApartmentsItem from '../components/apartment/ApartmentsItem.vue';
 import ApartmentsList from '../components/apartment/ApartmentsList.vue';
 import { getApartments } from '../services/apartment.service';
 import Container from '../components/shared/Container.vue';
+import SectionWithHeaderFooterSpaces from '../components/shared/SectionWithHeader&FooterSpaces.vue';
+import MainTitle from '../components/shared/MainTitle.vue';
 
 export default {
   name: 'App',
@@ -42,6 +48,8 @@ export default {
     ApartmentsItem,
     ApartmentsFilterForm,
     Container,
+    SectionWithHeaderFooterSpaces,
+    MainTitle,
   },
   data() {
     return {
@@ -91,15 +99,12 @@ export default {
 </script>
 
 <style>
-.inform {
+.homepage__title {
+  margin-bottom: 20px;
+}
+.homepage__inform {
   color: red;
   text-align: center;
   font-size: large;
-}
-.title {
-  font-size: 20px;
-  font-weight: 700;
-  line-height: 1.4;
-  margin-bottom: 20px;
 }
 </style>

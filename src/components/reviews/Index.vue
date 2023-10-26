@@ -1,7 +1,7 @@
 <template>
   <section class="reviews">
     <div class="reviews__rating-content">
-      <h2 class="reviews__title">Overall rating</h2>
+      <MainTitle class="reviews__title">Overall rating</MainTitle>
       <div class="reviews__total-rating-content">
         <p class="reviews__total-rating-descr">
           {{ amountOfReviews }} feedbacks
@@ -22,12 +22,14 @@
 
 <script>
 import StarRating from '../StarRating.vue';
+import MainTitle from '../shared/MainTitle.vue';
 import ReviewsItem from './reviews-item/index.vue';
 export default {
   name: 'Reviews',
   components: {
     ReviewsItem,
     StarRating,
+    MainTitle,
   },
   data() {
     return {
