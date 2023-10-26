@@ -11,3 +11,7 @@ export const getApartmentById = id => {
 export const getCities = () => {
   return axios.get('cities');
 };
+
+export const login = payload => {
+  return axios.post('users/login',payload);
+};
