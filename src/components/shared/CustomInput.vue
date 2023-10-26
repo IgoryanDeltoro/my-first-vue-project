@@ -6,7 +6,9 @@
       v-bind="$attrs"
       v-model="value"
     />
-    <span v-if="!isValid" class="custom-input__error">{{ error }}</span>
+    <span v-if="!success && !isValid" class="custom-input__error">{{
+      error
+    }}</span>
   </div>
 </template>
 
@@ -20,8 +22,12 @@ export default {
       error: '',
     };
   },
-  inheritAttrs: false,
-  inject: ['form'],
+  // inheritAttrs: false,
+  inject: {
+    form: {
+      default: null,
+    },
+  },
   props: {
     errorMessage: {
       type: String,
@@ -30,6 +36,10 @@ export default {
     rules: {
       type: Array,
       default: () => [],
+    },
+    success: {
+      type: Boolean,
+      default: false,
     },
   },
   mounted() {
@@ -61,7 +71,6 @@ export default {
       return this.isValid;
     },
     reset() {
-      // this.$emit('input', '');
       this.value = '';
     },
   },
@@ -75,7 +84,7 @@ export default {
   display: inline-flex;
 }
 .custom-input {
-  width: 220px;
+  width: 100%;
   height: 44px;
   padding: 11px 20px 11px 20px;
 
