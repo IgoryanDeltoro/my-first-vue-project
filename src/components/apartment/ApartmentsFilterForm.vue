@@ -64,14 +64,20 @@ export default {
   margin-bottom: 40px;
 
   &__select {
+    width: 220px;
+
     margin-right: 30px;
   }
 
   &__button {
     margin-left: auto;
   }
-}
-.form__input {
-  margin-right: auto;
+  &__input {
+    width: 220px;
+    margin-right: auto;
+  }
+  &__button {
+    width: 220px;
+  }
 }
 </style>

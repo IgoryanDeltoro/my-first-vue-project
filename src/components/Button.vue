@@ -23,7 +23,6 @@ export default {
 <style lang="scss" scoped>
 .btn {
   display: block;
-  width: 220px;
   height: 44px;
   background: #ff662d;
   color: #fff;
