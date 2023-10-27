@@ -98,7 +98,6 @@ export default {
   &__show-more {
     width: 100%;
     height: 44px;
-
     font-family: inherit;
     font-size: 16px;
     font-style: inherit;
