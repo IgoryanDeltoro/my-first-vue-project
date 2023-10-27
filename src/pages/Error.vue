@@ -19,6 +19,7 @@ export default {
 <style lang="scss" scoped>
 .error {
   width: 100%;
+  
   &__title {
     text-align: center;
     font-size: 100px;
