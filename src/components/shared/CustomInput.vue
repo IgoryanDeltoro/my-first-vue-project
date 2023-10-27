@@ -3,12 +3,11 @@
     <input
       class="custom-input"
       :class="!isValid && 'custom-input--error'"
+      @blur="blurHandler"
       v-bind="$attrs"
       v-model="value"
     />
-    <span v-if="!success && !isValid" class="custom-input__error">{{
-      error
-    }}</span>
+    <span v-if="!isValid" class="custom-input__error">{{ error }}</span>
   </div>
 </template>
 
@@ -18,8 +17,9 @@ export default {
   data() {
     return {
       value: '',
-      isValid: true,
       error: '',
+      isValid: true,
+      isFirstInput: true,
     };
   },
   // inheritAttrs: false,
@@ -42,6 +42,13 @@ export default {
       default: false,
     },
   },
+  watch: {
+    value() {
+      if (this.isFirstInput) return;
+      console.log(`watcher: ${this.isValid}`);
+      this.validate();
+    },
+  },
   mounted() {
     if (!this.form) return;
 
@@ -52,11 +59,6 @@ export default {
 
     this.form.unRegisterInput(this);
   },
-  watch: {
-    value() {
-      this.validate();
-    },
-  },
   methods: {
     validate() {
       this.isValid = this.rules.every(rule => {
@@ -65,12 +67,22 @@ export default {
         if (!hasPassed) {
           this.error = message || this.errorMessage;
         }
+
         return hasPassed;
       });
 
       return this.isValid;
     },
+    blurHandler() {
+      if (this.isFirstInput) {
+        this.validate();
+      }
+
+      this.isFirstInput = false;
+    },
     reset() {
+      this.isFirstInput = true;
+      this.isValid = true;
       this.value = '';
     },
   },
