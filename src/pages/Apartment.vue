@@ -22,7 +22,7 @@
 import Container from '../components/shared/Container.vue';
 import ApartmentMainInfo from '../components/apartment/ApartmentMainInfo.vue';
 import ApartmentsOwner from '../components/apartment/ApartmentsOwner.vue';
-import Reviews from '../components/reviews/index.vue';
+import Reviews from '../components/reviews/Reviews.vue';
 import Loading from '../components/Loading.vue';
 import { getApartmentById } from '../services/apartment.service';
 import SectionWithHeaderFooterSpaces from '../components/shared/SectionWithHeader&FooterSpaces.vue';
