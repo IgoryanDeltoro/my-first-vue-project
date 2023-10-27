@@ -7,6 +7,7 @@
         v-model="formData.email"
         name="email"
         type="email"
+        placeholder="Email"
         class="form__input form__input--first"
         :success="success"
       />
@@ -15,9 +16,9 @@
         v-model="formData.password"
         name="password"
         type="password"
+        placeholder="Password"
         class="form__input form__input--last"
         :success="success"
-       
       />
       <Button class="form__button" type="submit">Enter</Button>
     </Form>
@@ -64,7 +65,7 @@ export default {
       return [this.rules.isRequired, this.rules.emailValidation];
     },
     passwordRules() {
-      return [this.rules.passwordValidation];
+      return [this.rules.isRequired];
     },
   },
   methods: {
@@ -77,6 +78,7 @@ export default {
 
         try {
           const { data } = await login(this.formData);
+          console.log(data);
         } catch (error) {
           console.log(error);
         }
