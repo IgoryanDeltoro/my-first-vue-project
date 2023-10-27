@@ -23,7 +23,7 @@
 <script>
 import StarRating from '../StarRating.vue';
 import MainTitle from '../shared/MainTitle.vue';
-import ReviewsItem from './reviews-item/index.vue';
+import ReviewsItem from './reviews-item/ReviewsItem.vue';
 export default {
   name: 'Reviews',
   components: {
