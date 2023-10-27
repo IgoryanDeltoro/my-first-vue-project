@@ -15,3 +15,7 @@ export const getCities = () => {
 export const login = payload => {
   return axios.post('users/login',payload);
 };
+
+export const register = payload => {
+  return axios.post('users/register',payload);
+};
