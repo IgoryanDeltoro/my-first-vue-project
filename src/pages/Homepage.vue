@@ -4,7 +4,8 @@
       <Container>
         <ApartmentsFilterForm @data="filter" />
       </Container>
-      <Container>
+      <Loading v-if="loading" />
+      <Container v-else="!loading">
         <p class="homepage__inform" v-if="!filteredApartments.length">
           Apartments not found
         </p>
@@ -40,6 +41,7 @@ import { getApartments } from '../services/apartment.service';
 import Container from '../components/shared/Container.vue';
 import SectionWithHeaderFooterSpaces from '../components/shared/SectionWithHeader&FooterSpaces.vue';
 import MainTitle from '../components/shared/MainTitle.vue';
+import Loading from '../components/loaders/Loading.vue';
 
 export default {
   name: 'App',
@@ -50,10 +52,12 @@ export default {
     Container,
     SectionWithHeaderFooterSpaces,
     MainTitle,
+    Loading,
   },
   data() {
     return {
       apartments: [],
+      loading: false,
       filters: {
         city: '',
         price: 0,
@@ -62,11 +66,14 @@ export default {
   },
   async created() {
     try {
+      this.loading = true;
       const { data } = await getApartments();
 
       this.apartments = data;
     } catch (error) {
       console.log(error);
+    } finally {
+      this.loading = false;
     }
   },
   computed: {
@@ -106,5 +113,8 @@ export default {
   color: red;
   text-align: center;
   font-size: large;
+}
+.homepage__loader {
+  margin-top: 50px;
 }
 </style>
