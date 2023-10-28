@@ -1,18 +1,24 @@
 <template>
-  <h1 class="loading" >Loading...</h1>
+  <span class="loading" :style="{ color }">Loading...</span>
 </template>
 
 <script>
 export default {
-    name:'Loading'
+  name: 'Loading',
+  props: {
+    color: {
+      type: String,
+      default: 'green',
+    },
+  },
 };
 </script>
 
 <style lang="scss" scoped>
-@import '../../assets/scss/variables.scss';
 .loading {
+  display: block;
   text-align: center;
-  font-size: large;
-  color: $loading-text-color;
+  font-weight: 500;
+  font-size: 25px;
 }
 </style>
