@@ -14,7 +14,11 @@
       :key="review.author"
       :review="review"
     />
-    <button @click="toggleReview" class="reviews__show-more">
+    <button
+      v-if="amountOfReviews > 2"
+      @click="toggleReview"
+      class="reviews__show-more"
+    >
       {{ buttonText }}
     </button>
   </section>
