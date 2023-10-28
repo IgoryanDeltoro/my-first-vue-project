@@ -45,7 +45,7 @@ export default {
   watch: {
     value() {
       if (this.isFirstInput) return;
-      console.log(`watcher: ${this.isValid}`);
+
       this.validate();
     },
   },
