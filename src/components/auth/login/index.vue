@@ -9,7 +9,6 @@
         type="email"
         placeholder="Email"
         class="form__input form__input--first"
-        :success="success"
       />
       <CustomInput
         :rules="passwordRules"
@@ -18,9 +17,10 @@
         type="password"
         placeholder="Password"
         class="form__input form__input--last"
-        :success="success"
       />
-      <Button class="form__button" type="submit">Enter</Button>
+      <Button class="form__button" type="submit" :loading="loading"
+        >Enter</Button
+      >
     </Form>
   </AuthContainer>
 </template>
@@ -46,7 +46,7 @@ export default {
         email: '',
         password: '',
       },
-      success: false,
+      loading: false,
     };
   },
   components: {
@@ -74,13 +74,14 @@ export default {
       this.$refs.form.reset();
 
       if (isFormValid) {
-        this.success = true;
-
         try {
+          this.loading = true;
           const { data } = await login(this.formData);
           console.log(data);
         } catch (error) {
           console.log(error);
+        } finally {
+          this.loading = false;
         }
       }
     },
