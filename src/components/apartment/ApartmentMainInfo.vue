@@ -1,12 +1,14 @@
 <template>
   <article class="article">
     <div class="article__content">
-    <MainTitle class="article__title">{{ apartment.title }}</MainTitle>
+      <MainTitle class="article__title">{{ apartment.title }}</MainTitle>
       <StarRating :rating="apartment.rating" />
     </div>
     <img class="article__img" :src="apartment.imgUrl" alt="apartment" />
     <p class="article__descr">{{ apartment.descr }}</p>
-    <Button class="article__btn" :outline="false">Book</Button>
+    <div class="article__btn">
+      <Button :outline="false">Book</Button>
+    </div>
   </article>
 </template>
 
@@ -22,8 +24,8 @@ export default {
     Container,
     StarRating,
     Button,
-    MainTitle
-},
+    MainTitle,
+  },
   props: {
     apartment: {
       type: Object,
@@ -62,9 +64,7 @@ export default {
     margin-bottom: 35px;
   }
   &__btn {
-    margin-left: auto;
-    margin-right: auto;
-    width: 220px;
+    text-align: center;
   }
 }
 </style>
