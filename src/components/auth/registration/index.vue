@@ -9,7 +9,6 @@
         type="name"
         placeholder="Name"
         class="form__input"
-        :success="success"
       />
       <CustomInput
         :rules="emailRules"
@@ -18,7 +17,6 @@
         type="email"
         placeholder="Email"
         class="form__input"
-        :success="success"
       />
       <CustomInput
         :rules="passwordRules"
@@ -27,7 +25,6 @@
         type="password"
         placeholder="Password"
         class="form__input"
-        :success="success"
       />
       <CustomInput
         :rules="confirmPassword"
@@ -36,7 +33,6 @@
         type="password"
         placeholder="Confirm password"
         class="form__input form__input--last"
-        :success="success"
       />
       <Button class="form__button" type="submit" :loading="loading"
         >Enter</Button
@@ -111,9 +107,18 @@ export default {
         try {
           this.loading = true;
           const { data } = await register({ name, email, password });
-          console.log(data);
+          const { user } = data;
+          this.$notify({
+            type: 'success',
+            title: 'You have successfully registration  ',
+            text: `like ${user.name}` ,
+          });
         } catch (error) {
-          console.log(error);
+          this.$notify({
+            type: 'error',
+            title: 'Registration error',
+            text: error.message,
+          });
         } finally {
           this.loading = false;
         }
@@ -134,9 +139,9 @@ export default {
     margin-bottom: 18px;
   }
 }
-.form {
+::v-deep .form {
   &__input {
-    width: 100%;
+    width: 350px;
     margin-bottom: 23px;
 
     &--last {
