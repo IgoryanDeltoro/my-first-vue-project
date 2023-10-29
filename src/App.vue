@@ -1,6 +1,7 @@
 <template>
   <div class="app">
     <div class="content">
+      <notifications />
       <Header />
       <router-view></router-view>
     </div>
@@ -29,6 +30,5 @@ export default {
 }
 .content {
   flex-grow: 1;
-
 }
 </style>
