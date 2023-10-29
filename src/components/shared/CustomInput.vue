@@ -22,7 +22,7 @@ export default {
       isFirstInput: true,
     };
   },
-  // inheritAttrs: false,
+  inheritAttrs: false,
   inject: {
     form: {
       default: null,
