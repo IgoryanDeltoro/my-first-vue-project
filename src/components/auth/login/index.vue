@@ -77,9 +77,18 @@ export default {
         try {
           this.loading = true;
           const { data } = await login(this.formData);
-          console.log(data);
+          const { user } = data;
+          this.$notify({
+            type: 'success',
+            title: 'You have successfully logged in  ',
+            text: `like ${user.name}` ,
+          });
         } catch (error) {
-          console.log(error);
+          this.$notify({
+            type: 'error',
+            title: 'Log in error',
+            text: error.message,
+          });
         } finally {
           this.loading = false;
         }
@@ -100,9 +109,9 @@ export default {
     margin-bottom: 18px;
   }
 }
-.form {
+::v-deep .form {
   &__input {
-    width: 100%;
+    width: 350px;
 
     &--first {
       margin-bottom: 23px;
