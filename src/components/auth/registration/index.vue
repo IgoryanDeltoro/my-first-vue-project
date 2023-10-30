@@ -106,13 +106,9 @@ export default {
 
         try {
           this.loading = true;
-          const { data } = await register({ name, email, password });
-          const { user } = data;
-          this.$notify({
-            type: 'success',
-            title: 'You have successfully registration  ',
-            text: `like ${user.name}` ,
-          });
+          await this.$store.dispatch('registration', { name, email, password });
+
+          this.$router.push({ name: 'homepage' });          
         } catch (error) {
           this.$notify({
             type: 'error',

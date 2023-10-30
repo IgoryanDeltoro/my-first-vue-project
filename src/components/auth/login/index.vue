@@ -36,7 +36,6 @@ import {
   isRequired,
 } from '../../../utils/validationRules';
 import MainTitle from '../../shared/MainTitle.vue';
-import { login } from '../../../services/apartment.service';
 
 export default {
   name: 'Login',
@@ -76,13 +75,9 @@ export default {
       if (isFormValid) {
         try {
           this.loading = true;
-          const { data } = await login(this.formData);
-          const { user } = data;
-          this.$notify({
-            type: 'success',
-            title: 'You have successfully logged in  ',
-            text: `like ${user.name}` ,
-          });
+          const data = await this.$store.dispatch('login', this.formData);
+
+          this.$router.push({ name: 'homepage' });
         } catch (error) {
           this.$notify({
             type: 'error',
