@@ -52,7 +52,7 @@ import {
   isRequired,
 } from '../../../utils/validationRules';
 import MainTitle from '../../shared/MainTitle.vue';
-import { register } from '../../../services/apartment.service';
+import { mapActions } from 'vuex';
 
 export default {
   name: 'Registration',
@@ -97,6 +97,7 @@ export default {
     },
   },
   methods: {
+    ...mapActions('auth', ['registerUser']),
     async handleSubmit() {
       const isFormValid = this.$refs.form.validate();
       this.$refs.form.reset();
@@ -106,7 +107,7 @@ export default {
 
         try {
           this.loading = true;
-          await this.$store.dispatch('registration', { name, email, password });
+          await this.registerUser({ name, email, password });
 
           this.$router.push({ name: 'homepage' });          
         } catch (error) {
