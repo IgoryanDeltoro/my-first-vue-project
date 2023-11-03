@@ -22,14 +22,10 @@ export default {
   color: $white-color;
 
   &__link {
-    color: $white-color;
     transition: color $transition-time;
-
-    font-family: inherit;
-    font-size: 16px;
-    font-weight: 500;
-    line-height: 1.2;
+    color: inherit;
     text-decoration: none;
+    font-weight: 500;
 
     &:hover {
       color: $main-color;
