@@ -23,7 +23,7 @@ export default {
 
   &__link {
     color: $white-color;
-    transition: color 250ms;
+    transition: color $transition-time;
 
     font-family: inherit;
     font-size: 16px;
