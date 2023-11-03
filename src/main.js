@@ -6,8 +6,9 @@ import './assets/scss/index.scss';
 import store from './components/store';
 
 const app = createApp(App);
+store.dispatch('auth/loadDataFromLS');
 
 app.use(router);
-app.use(store)
+app.use(store);
 app.use(Notifications);
 app.mount('#app');
