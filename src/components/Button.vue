@@ -1,6 +1,12 @@
 <template>
   <button :type="type" :class="{ btn: true, 'btn--outline': outline }">
-    <LoaderCircle class="btn__loader" v-if="loading" :width="38" :height="38" />
+    <LoaderCircle
+      class="btn__loader"
+      v-if="loading"
+      :color="loading && 'red'"
+      :width="38"
+      :height="38"
+    />
     <span class="btn__content" :class="contentStyle">
       <slot></slot>
     </span>
@@ -39,29 +45,30 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import '../assets/scss/variables.scss';
 .btn {
   position: relative;
   display: inline-block;
   font-size: 18px;
-  background: #ff662d;
-  color: #fff;
+  background: $main-color;
+  color: $white-color;
   cursor: pointer;
   min-width: 220px;
   border: 1px solid transparent;
   padding: 8px 15px;
-  transition: background-color 0.4s, color 0.4s;
-  font-family: Montserrat, sans-serif;
+  transition: background-color $transition-time, color $transition-time;
+  font-family: inherit;
 
   &:hover {
-    background: #fff;
-    color: #ff662d;
-    border: 1px solid #ff662d;
+    background: $white-color;
+    color: $main-color;
+    border: 1px solid $main-color;
   }
 
   &--outline {
-    background: #fff;
-    color: #ff662d;
-    border: 1px solid #ff662d;
+    background: $white-color;
+    color: $main-color;
+    border: 1px solid $main-color;
   }
   &__content {
     &--hidden {
