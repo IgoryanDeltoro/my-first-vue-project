@@ -12,6 +12,9 @@ export default {
     isLoggedIn(state) {
       return Boolean(state.token);
     },
+    getUserData(state) {
+      return state.user;
+    },
   },
   mutations: {
     SET_USER_DATA(state, userData) {
@@ -20,12 +23,14 @@ export default {
     SET_TOKEN(state, token) {
       state.token = token;
     },
-    SAVE_TOKEN_TO_LOCAL_STORAGE(_, token) {
-      window.localStorage.setItem('token', token);
+    SAVE_DATA_TO_LOCAL_STORAGE(_, data) {
+      window.localStorage.setItem('userData', JSON.stringify(data));
     },
-    GET_TOKEN_FROM_LOCAL_STORAGE(state) {
-      const token = window.localStorage.getItem('token');
-      state.token = token;
+    GET_DATA_FROM_LOCAL_STORAGE(state) {
+      const userData = window.localStorage.getItem('userData');
+      const data = JSON.parse(userData);
+      state.token = data.token;
+      state.user = data.user;
     },
   },
   actions: {
@@ -35,7 +40,7 @@ export default {
 
       commit('SET_USER_DATA', user);
       commit('SET_TOKEN', token);
-      commit('SAVE_TOKEN_TO_LOCAL_STORAGE', token);
+      commit('SAVE_DATA_TO_LOCAL_STORAGE', data);
     },
 
     async registerUser({ commit }, payload) {
@@ -44,10 +49,10 @@ export default {
 
       commit('SET_USER_DATA', user);
       commit('SET_TOKEN', token);
-      commit('SAVE_TOKEN_TO_LOCAL_STORAGE', token);
+      commit('SAVE_DATA_TO_LOCAL_STORAGE', data);
     },
     loadDataFromLS({ commit }) {
-      commit('GET_TOKEN_FROM_LOCAL_STORAGE');
+      commit('GET_DATA_FROM_LOCAL_STORAGE');
     },
   },
 };
