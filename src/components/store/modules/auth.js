@@ -29,8 +29,8 @@ export default {
     GET_DATA_FROM_LOCAL_STORAGE(state) {
       const userData = window.localStorage.getItem('userData');
       const data = JSON.parse(userData);
-      state.token = data.token;
-      state.user = data.user;
+      state.token = data?.token;
+      state.user = data?.user;
     },
   },
   actions: {
