@@ -1,24 +1,22 @@
 <template>
-  <div class="auth">
-    <router-link class="auth__link" :to="{ name: 'login-page' }">
+  <div class="auth-action">
+    <router-link class="auth-action__link" :to="{ name: 'login-page' }">
       Login
     </router-link>
     /
-    <router-link class="auth__link" :to="{ name: 'register-page' }">
+    <router-link class="auth-action__link" :to="{ name: 'register-page' }">
       Registration
     </router-link>
   </div>
 </template>
 
 <script>
-export default {
-  name: 'AuthActions',
-};
+export default {};
 </script>
 
 <style lang="scss" scoped>
 @import '../../assets/scss/variables.scss';
-.auth {
+.auth-action {
   color: $white-color;
 
   &__link {
