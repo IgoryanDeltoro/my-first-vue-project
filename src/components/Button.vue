@@ -1,9 +1,14 @@
 <template>
-  <button :type="type" :class="{ btn: true, 'btn--outline': outline }">
+  <button
+    :type="type"
+    @mouseover="hover"
+    @mouseleave="blur"
+    :class="{ btn: true, 'btn--outline': outline }"
+  >
     <LoaderCircle
       class="btn__loader"
       v-if="loading"
-      :color="loading && 'red'"
+      :color="color"
       :width="38"
       :height="38"
     />
@@ -19,6 +24,11 @@ export default {
   name: 'Button',
   components: {
     LoaderCircle,
+  },
+  data() {
+    return {
+      color: '#ffffff',
+    };
   },
   props: {
     type: {
@@ -39,6 +49,14 @@ export default {
       return {
         'btn__content--hidden': this.loading,
       };
+    },
+  },
+  methods: {
+    hover() {
+      this.color = '#ff0000';
+    },
+    blur() {
+      this.color = '#ffffff';
     },
   },
 };
