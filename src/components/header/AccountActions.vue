@@ -38,7 +38,7 @@
         </router-link>
       </li>
       <li class="account-action__item">
-        <button class="account-action__logout-btn">
+        <button @click="handleLogout" class="account-action__logout-btn">
           <img
             class="account-action__img"
             src="../../assets/svg/logout.svg"
@@ -54,6 +54,7 @@
 <script>
 import Logo from '../Logo.vue';
 import UserAvatar from './UserAvatar.vue';
+import { mapActions } from 'vuex';
 
 export default {
   components: {
@@ -71,6 +72,9 @@ export default {
       required: true,
     },
   },
+  computed: {
+    ...mapActions('auth', ['logout']),
+  },
   methods: {
     open() {
       this.isOpen = true;
@@ -80,6 +84,16 @@ export default {
     },
     toggle() {
       this.isOpen = !this.isOpen;
+    },
+    async handleLogout() {
+      try {
+        await this.logout();
+        const { requiresAuth } = this.state;
+        
+        if (requiresAuth) {
+          this.$router.push({ name: 'login-page' });
+        }
+      } catch (error) {}
     },
   },
 };
@@ -141,6 +155,9 @@ export default {
     &:not(:last-child) {
       margin-bottom: 10px;
     }
+    &:hover:nth-child(n + 4) {
+      color: $main-color;
+    }
   }
   &__logo {
     text-transform: uppercase;
@@ -171,6 +188,7 @@ export default {
     cursor: pointer;
     background: none;
     border: none;
+    color: inherit;
   }
 }
 </style>
