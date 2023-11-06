@@ -1,4 +1,4 @@
-import { login, register, logout } from '../../services/apartment.service';
+import { login, register, logout } from '../../services/auth.service';
 
 const initialState = {
   user: null,
