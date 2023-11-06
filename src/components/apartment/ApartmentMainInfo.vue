@@ -7,7 +7,9 @@
     <img class="article__img" :src="apartment.imgUrl" alt="apartment" />
     <p class="article__descr">{{ apartment.descr }}</p>
     <div class="article__btn">
-      <Button :outline="false">Book</Button>
+      <Button @click="handleBooking" :loading="isLoading" :outline="false"
+        >Book</Button
+      >
     </div>
   </article>
 </template>
@@ -17,6 +19,7 @@ import StarRating from '../StarRating.vue';
 import Container from '../shared/Container.vue';
 import Button from '../Button.vue';
 import MainTitle from '../shared/MainTitle.vue';
+import { bookApartment } from '../../services/order.service';
 
 export default {
   name: 'ApartmentMainInfo',
@@ -26,10 +29,49 @@ export default {
     Button,
     MainTitle,
   },
+  data() {
+    return {
+      isLoading: false,
+    };
+  },
   props: {
     apartment: {
       type: Object,
       required: true,
+    },
+  },
+  methods: {
+    async handleBooking() {
+      const body = {
+        apartmentId: this.$route.params.id,
+        date: this.formatDate(),
+      };
+
+      try {
+        this.isLoading = true;
+        await bookApartment(body);
+        this.$notify({
+          type: 'success',
+          title: 'You have successful order',
+        });
+      } catch (error) {
+        this.$notify({
+          type: 'error',
+          title: 'Booking error',
+          text: error.message,
+        });
+      } finally {
+        this.isLoading = false;
+      }
+    },
+
+    formatDate() {
+      const UNIX = Date.now();
+      const date = new Date(UNIX);
+      return new Intl.DateTimeFormat('en-US', {
+        dateStyle: 'short',
+        timeStyle: 'short',
+      }).format(date);
     },
   },
 };
