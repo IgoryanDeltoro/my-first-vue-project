@@ -4,7 +4,7 @@ import Homepage from './pages/Homepage.vue';
 import ErrorPage from './pages/Error.vue';
 import Registration from './pages/Registration.vue';
 import LoginPage from './pages/Login.vue';
-
+import MyOrdersPage from './pages/MyOrders.vue';
 
 const routes = [
   {
@@ -26,6 +26,11 @@ const routes = [
     path: '/registration',
     component: Registration,
     name: 'register-page',
+  },
+  {
+    path: '/my-orders',
+    component: MyOrdersPage,
+    name: 'my-orders-page',
   },
   {
     path: '/:catchAll(.*)',
