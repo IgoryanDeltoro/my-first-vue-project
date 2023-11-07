@@ -18,7 +18,7 @@
 </template>
 
 <script>
-import Loading from '../components/loaders/loading.vue';
+import Loading from '../components/loaders/Loading.vue';
 import OrdersList from '../components/my-orders/OrdersList.vue';
 import Container from '../components/shared/Container.vue';
 import MainTitle from '../components/shared/MainTitle.vue';
