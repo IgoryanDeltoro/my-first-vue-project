@@ -3,7 +3,7 @@
     <SectionWithHeaderFooterSpaces>
       <Container>
         <Loading v-if="isLoading" />
-        <div v-else="!isLoading" class="apartment-page">
+        <div v-else class="apartment-page">
           <ApartmentMainInfo :apartment="apartment" />
           <div class="apartment-page__additional-info">
             <ApartmentsOwner
