@@ -28,7 +28,7 @@
         </span>
       </li>
       <li class="account-action__item">
-        <router-link class="account-action__link" :to="{}">
+        <router-link :to="{ name: 'my-orders-page' }" class="account-action__link">
           <img
             class="account-action__img"
             src="../../assets/svg/order_icon.svg"
