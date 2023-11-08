@@ -5,32 +5,38 @@ import ErrorPage from './pages/Error.vue';
 import Registration from './pages/Registration.vue';
 import LoginPage from './pages/Login.vue';
 import MyOrdersPage from './pages/MyOrders.vue';
+import store from './store/index';
 
 const routes = [
   {
     path: '/',
     component: Homepage,
     name: 'homepage',
+    meta: { requiresAuth: true },
   },
   {
     path: '/apartment/:id',
     component: ApartmentPage,
     name: 'apartment',
+    meta: { requiresAuth: true },
   },
   {
     path: '/login',
     component: LoginPage,
     name: 'login-page',
+    meta: { hideForAuth: true },
   },
   {
     path: '/registration',
     component: Registration,
     name: 'register-page',
+    meta: { hideForAuth: true },
   },
   {
     path: '/my-orders',
     component: MyOrdersPage,
     name: 'my-orders-page',
+    meta: { requiresAuth: true },
   },
   {
     path: '/:catchAll(.*)',
@@ -42,6 +48,21 @@ const routes = [
 const router = createRouter({
   history: createWebHistory(),
   routes,
+});
+
+router.beforeEach((to, from, next) => {
+  const isLoggedIn = store.getters['auth/isLoggedIn'];
+  if (to.matched.some(record => record.meta.requiresAuth)) {
+    if (!isLoggedIn) next({ name: 'login-page' });
+  }
+
+  if (to.matched.some(record => record.meta.hideForAuth)) {
+    if (isLoggedIn) {
+      next({ name: 'homepage' });
+    }
+  }
+
+  next();
 });
 
 export default router;
