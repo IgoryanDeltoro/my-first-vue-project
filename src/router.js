@@ -1,11 +1,12 @@
 import { createRouter, createWebHistory } from 'vue-router';
-import ApartmentPage from './pages/Apartment.vue';
-import Homepage from './pages/Homepage.vue';
 import ErrorPage from './pages/Error.vue';
-import Registration from './pages/Registration.vue';
-import LoginPage from './pages/Login.vue';
-import MyOrdersPage from './pages/MyOrders.vue';
 import store from './store/index';
+
+const ApartmentPage = () => import('./pages/Apartment.vue');
+const Homepage = () => import('./pages/Homepage.vue');
+const Registration = () => import('./pages/Registration.vue');
+const LoginPage = () => import('./pages/Login.vue');
+const MyOrdersPage = () => import('./pages/MyOrders.vue');
 
 const routes = [
   {
