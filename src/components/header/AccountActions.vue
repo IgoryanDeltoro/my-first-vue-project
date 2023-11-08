@@ -28,7 +28,10 @@
         </span>
       </li>
       <li class="account-action__item">
-        <router-link :to="{ name: 'my-orders-page' }" class="account-action__link">
+        <router-link
+          :to="{ name: 'my-orders-page' }"
+          class="account-action__link"
+        >
           <img
             class="account-action__img"
             src="../../assets/svg/order_icon.svg"
@@ -88,7 +91,11 @@ export default {
     async handleLogout() {
       try {
         await this.logout;
-        this.$router.push({ name: 'login-page' });
+
+        const { requiresAuth } = this.$route.meta;
+        if (requiresAuth) {
+          this.$router.push({ name: 'login-page' });
+        }
       } catch (error) {
         this.$notify({
           type: 'error',
