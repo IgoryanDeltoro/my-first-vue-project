@@ -13,7 +13,6 @@ const routes = [
     path: '/',
     component: Homepage,
     name: 'homepage',
-    meta: { requiresAuth: true },
   },
   {
     path: '/apartment/:id',
