@@ -58,9 +58,9 @@ export default {
   }
 }
 .star--outlined {
-  background: url(../../public/image/star-outlined.svg) center no-repeat;
+  background: url(.././assets/svg/star-outlined.svg) center no-repeat;
 }
 .star--colored {
-  background: url(../../public/image/star-orang.svg) center no-repeat;
+  background: url(.././assets/svg/star-orang.svg) center no-repeat;
 }
 </style>
