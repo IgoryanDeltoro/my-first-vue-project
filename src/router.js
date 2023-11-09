@@ -46,8 +46,7 @@ const routes = [
 ];
 
 const router = createRouter({
-  history: createWebHistory(),
-  root: "/index.html",
+  history: createWebHistory("index.html"),
   routes,
 });
 
