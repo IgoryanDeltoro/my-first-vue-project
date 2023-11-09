@@ -38,11 +38,11 @@ const routes = [
     name: 'my-orders-page',
     meta: { requiresAuth: true },
   },
-  {
-    path: '/:catchAll(.*)',
-    component: ErrorPage,
-    name: 'error-page',
-  },
+  // {
+  //   path: '/:catchAll(.*)',
+  //   component: ErrorPage,
+  //   name: 'error-page',
+  // },
 ];
 
 const router = createRouter({
