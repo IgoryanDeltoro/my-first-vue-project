@@ -1,4 +1,4 @@
-import { createRouter, createWebHistory } from 'vue-router';
+import { createRouter, createWebHistory,createWebHashHistory } from 'vue-router';
 import ErrorPage from './pages/Error.vue';
 import store from './store/index';
 
@@ -46,7 +46,7 @@ const routes = [
 ];
 
 const router = createRouter({
-  history: createWebHistory("index.html"),
+  history: createWebHashHistory(),
   routes,
 });
 
