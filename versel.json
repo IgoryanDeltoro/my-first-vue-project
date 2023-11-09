@@ -1,8 +1,24 @@
 {
     "routes": [
         {
-            "source": "/(.*)",
-            "destination": "/"
+            "srs": "/",
+            "dest": "/"
+        },
+        {
+            "srs": "/apartment/:id",
+            "dest": "/"
+        },
+        {
+            "srs": "/register",
+            "dest": "/"
+        },
+        {
+            "srs": "/registration",
+            "dest": "/"
+        },
+        {
+            "srs": "/my-orders",
+            "dest": "/"
         }
     ]
 }
