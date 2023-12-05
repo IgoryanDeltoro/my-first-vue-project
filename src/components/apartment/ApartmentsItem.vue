@@ -1,7 +1,9 @@
 <template>
   <div class="apartment-item">
     <div class="apartment-item__inner">
-      <img :src="imgSrc" alt="" class="apartment-item__img" />
+      <Skelton class="apartment-item__skeleton">
+        <img :src="imgSrc" alt="" class="apartment-item__img" />
+      </Skelton>
       <div class="apartment-item__content">
         <p class="apartment-item__description">{{ description }}</p>
         <div class="apartment-item__rating">
@@ -22,11 +24,13 @@
 
 <script>
 import StarRating from '../StarRating.vue';
+import Skelton from '../Skeleton.vue';
 
 export default {
   name: 'ApartmentItem',
   components: {
     StarRating,
+    Skelton,
   },
   props: {
     description: {
@@ -67,12 +71,18 @@ export default {
   &:nth-last-child(-n + 3) {
     margin-bottom: 0;
   }
-}
-.apartment-item__inner {
+  &__inner {
   position: relative;
   width: 100%;
   height: 100%;
 }
+  &__skeleton{
+    width: 100%;
+    height: 100%;
+  }
+}
+
+
 .apartment-item__img {
   width: 100%;
   height: 100%;
