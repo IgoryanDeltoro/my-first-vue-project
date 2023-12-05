@@ -213,6 +213,7 @@ export default {
   }
 
   &__btn {
+    width: 220px;
     margin-left: auto;
   }
 
