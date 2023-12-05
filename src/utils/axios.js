@@ -2,7 +2,7 @@ import axios from 'axios';
 import store from '../store/index';
 
 const axiosInstance = axios.create({
-  baseURL: 'https://booking-cli.onrender.com/booking/',
+  baseURL: 'https://booking-cli.onrender.com/booking',
 });
 
 axiosInstance.interceptors.request.use(
