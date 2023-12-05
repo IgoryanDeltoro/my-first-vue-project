@@ -1,6 +1,8 @@
 <template>
   <div class="orders-item">
-    <img class="orders-item__img" :src="order.imgUrl" alt="Apartment photo" />
+    <Skeleton class="orders-item__img-box">
+      <img class="orders-item__img" :src="order.imgUrl" alt="Apartment photo" />
+    </Skeleton>
     <div class="orders-item__details">
       <div class="orders-item__text">
         <MainTitle class="orders-item__title" :level="2">
@@ -26,11 +28,14 @@
 <script>
 import MainTitle from '../shared/MainTitle.vue';
 import { removeOrder } from '../../services/order.service';
+import { mapActions, mapState } from 'vuex';
+import Skeleton from '../Skeleton.vue';
 
 export default {
   name: 'OrdersItem',
   components: {
     MainTitle,
+    Skeleton,
   },
   props: {
     order: {
@@ -38,7 +43,12 @@ export default {
       required: true,
     },
   },
+  computed: {
+    ...mapState('booking', ['isLoading']),
+  },
   methods: {
+    ...mapActions('booking', ['getOrders']),
+
     async removeApartment() {
       try {
         await removeOrder(this.order.id);
@@ -53,6 +63,8 @@ export default {
           title: 'Delete error',
           text: error.message,
         });
+      } finally {
+        await this.getOrders();
       }
     },
   },
@@ -64,10 +76,21 @@ export default {
 .orders-item {
   margin-bottom: 20px;
   display: flex;
+  -webkit-transform: scale(1);
+  -moz-transform: scale(1);
+  transform: scale(1);
+  transition-duration: $transition-time;
+  box-shadow: $cards-box-shadow;
 
-  &__img {
+  &__img-box {
     width: 45%;
     height: 190px;
+    /* border: 2px solid #e1efff; */
+    /* border-right: none; */
+  }
+  &__img {
+    width: 100%;
+    height: 100%;
     object-fit: cover;
   }
   &__details {
@@ -77,8 +100,8 @@ export default {
     justify-content: space-between;
     width: 55%;
     padding: 20px;
-    border: 2px solid #e1efff;
-    border-left: none;
+    /* border: 2px solid #e1efff; */
+    /* border-left: none; */
   }
   &__title {
     margin-bottom: 10px;
@@ -88,14 +111,24 @@ export default {
     font-weight: 700;
   }
   &__delete-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     position: absolute;
+    width: 50px;
+    height: 50px;
     bottom: 15px;
     right: 15px;
     background: none;
     border: none;
     cursor: pointer;
-    transition: opacity $transition-time;
+    border-radius: 50%;
+    transition: opacity $transition-time ease-out;
     opacity: 0;
+
+    &:hover {
+      background-color: $gray-border-color;
+    }
   }
   &__delete-img {
     width: 25px;
@@ -103,6 +136,26 @@ export default {
   }
   &:hover &__delete-btn {
     opacity: 1;
+    color: $main-color;
+  }
+
+  &:hover {
+    -webkit-transform: scale(1.05);
+    -moz-transform: scale(1.05);
+    transform: scale(1.05);
+    box-shadow: $box-shadow-out;
+  }
+}
+
+@keyframes pulse-bg {
+  0% {
+    background-color: #ddd;
+  }
+  50% {
+    background-color: #d0d0d0;
+  }
+  100% {
+    background-color: #ddd;
   }
 }
 </style>
