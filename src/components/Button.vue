@@ -71,7 +71,7 @@ export default {
   background: $main-color;
   color: $white-color;
   cursor: pointer;
-  min-width: 220px;
+  min-width: 100px;
   border: 1px solid transparent;
   padding: 8px 15px;
   transition: background-color $transition-time, color $transition-time;
