@@ -1,10 +1,37 @@
 <template>
-  <div class="star-rating">
-    <div class="star-rating__colored" :style="ratingWidth">
-      <span class="star star--colored" v-for="index in starLimit" :key="index">
+  <div
+    @mouseup="showModal"
+    @mouseover="onStars"
+    @mouseleave="leaveStars"
+    class="star-rating"
+    :style="{ width: computeBoxWidth, height: starSize }"
+  >
+    <div class="star-rating__colored" :style="ratingValue">
+      <span
+        class="star star--colored"
+        v-for="index in starLimit"
+        :key="index"
+        :aria-label="index"
+        ref="star"
+        :style="{
+          width: this.starSize,
+          height: this.starSize,
+          marginRight: index !== 5 ? gap : 0,
+        }"
+      >
       </span>
     </div>
-    <span class="star star--outlined" v-for="index in starLimit" :key="index">
+    <span
+      class="star star--outlined"
+      v-for="index in starLimit"
+      :key="index"
+      :aria-label="index"
+      :style="{
+        width: this.starSize,
+        height: this.starSize,
+        marginRight: index !== 5 ? gap : 0,
+      }"
+    >
     </span>
   </div>
 </template>
@@ -12,6 +39,17 @@
 <script>
 export default {
   name: 'StarRating',
+  data() {
+    return {
+      isModalOpened: false,
+      ratingValue: {},
+    };
+  },
+  inject: {
+    div: {
+      default: null,
+    },
+  },
   props: {
     rating: {
       type: Number,
@@ -21,10 +59,62 @@ export default {
       type: Number,
       default: 5,
     },
+    starSize: {
+      type: String,
+      default: '16px',
+    },
+    switch: {
+      type: Boolean,
+      default: true,
+    },
+    gap: {
+      type: String,
+      default: '5px',
+    },
+  },
+
+  created() {
+    this.ratingValue = this.computeRatingWidth();
+  },
+  watch: {
+    rating() {
+      this.ratingValue = this.computeRatingWidth();
+    },
   },
   computed: {
-    ratingWidth() {
-      return { width: (this.rating / this.starLimit) * 100 + '%' } ;
+    computeBoxWidth() {
+      return `${parseInt(this.starSize) * 5 + parseInt(this.gap) * 4}px`;
+    },
+  },
+  methods: {
+    computeRatingWidth(value) {
+      const ratingValue = value ? value : this.rating;
+      const sum = (ratingValue / this.starLimit) * 100;
+      return { width: `${sum}%` };
+    },
+    showModal(event) {
+      if (this.switch) {
+        const { ariaLabel } = event.target;
+        this.isModalOpened = true;
+        this.div.showModal(this.isModalOpened, +ariaLabel);
+      } else {
+        event.stopPropagation();
+      }
+    },
+    onStars(event) {
+      if (this.switch) {
+        const { ariaLabel } = event.target;
+        const value = Number(ariaLabel);
+
+        if (value) {
+          this.ratingValue = this.computeRatingWidth(value);
+        }
+      } else {
+        event.stopPropagation();
+      }
+    },
+    leaveStars() {
+      this.ratingValue = this.computeRatingWidth();
     },
   },
 };
@@ -32,8 +122,6 @@ export default {
 
 <style lang="scss" scoped>
 .star-rating {
-  width: 100px;
-  height: 16px;
   position: relative;
 
   &__colored {
@@ -49,18 +137,22 @@ export default {
 
 .star {
   display: inline-block;
-  width: 16px;
-  height: 16px;
   flex-shrink: 0;
 
-  &:not(:last-child) {
-    margin-right: 5px;
+  &:last-child {
+    margin-right: 0;
   }
 }
 .star--outlined {
-  background: url(.././assets/svg/star-outlined.svg) center no-repeat;
+  background: url(.././assets/svg/star-outlined.svg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
 }
 .star--colored {
-  background: url(.././assets/svg/star-orang.svg) center no-repeat;
+  background: url(.././assets/svg/star-orang.svg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
 }
 </style>
