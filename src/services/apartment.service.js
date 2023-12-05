@@ -12,6 +12,6 @@ export const getCities = () => {
   return axios.get('cities');
 };
 
-
-
-
+export const addReview = (id, data) => {
+  return axios.post(`apartments/${id}/reviews`, data);
+};
