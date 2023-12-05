@@ -24,8 +24,9 @@ import ApartmentMainInfo from '../components/apartment/ApartmentMainInfo.vue';
 import ApartmentsOwner from '../components/apartment/ApartmentsOwner.vue';
 import Reviews from '../components/reviews/Reviews.vue';
 import Loading from '../components/loaders/Loading.vue';
-import { getApartmentById } from '../services/apartment.service';
 import SectionWithHeaderFooterSpaces from '../components/shared/SectionWithHeader&FooterSpaces.vue';
+import { mapActions, mapState } from 'vuex';
+
 export default {
   name: 'ApartmentPage',
   components: {
@@ -36,27 +37,19 @@ export default {
     Loading,
     SectionWithHeaderFooterSpaces,
   },
-  data() {
-    return {
-      isLoading: false,
-      apartment: {},
-    };
+  methods: {
+    ...mapActions('booking', ['getApartmentById']),
+  },
+  computed: {
+    ...mapState('booking', ['apartment', 'isLoading']),
   },
   async created() {
     try {
-      this.isLoading = true;
       const { id } = this.$route.params;
-      const { data } = await getApartmentById(id);
-      this.apartment = data;
-      this.isLoading = false;
+      await this.getApartmentById(id);
     } catch (error) {
       console.log(error);
     }
-  },
-  computed: {
-    reviews() {
-      return reviews;
-    },
   },
 };
 </script>

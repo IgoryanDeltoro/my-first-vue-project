@@ -6,7 +6,8 @@
         <p class="reviews__total-rating-descr">
           {{ amountOfReviews }} feedbacks
         </p>
-        <StarRating :rating="totalReviews" />
+
+        <StarRating title="Press to leave feedback" :rating="totalReviews" />
       </div>
     </div>
     <ReviewsItem
@@ -53,7 +54,8 @@ export default {
         0
       );
 
-      return total / this.reviews.length;
+      const result = total / this.reviews.length;
+      return +result.toFixed(1);
     },
     currentReviews() {
       return this.reviews.slice(0, this.reviewsLimit);

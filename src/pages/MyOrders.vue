@@ -23,7 +23,8 @@ import OrdersList from '../components/my-orders/OrdersList.vue';
 import Container from '../components/shared/Container.vue';
 import MainTitle from '../components/shared/MainTitle.vue';
 import SectionWithHeaderFooterSpaces from '../components/shared/SectionWithHeader&FooterSpaces.vue';
-import { getOrders } from '../services/order.service';
+import { mapActions, mapState } from 'vuex';
+
 export default {
   name: 'MyOrders',
   components: {
@@ -33,25 +34,23 @@ export default {
     OrdersList,
     Loading,
   },
-  data() {
-    return {
-      orders: [],
-      isLoading: false,
-    };
+
+  methods: {
+    ...mapActions('booking', ['getOrders']),
   },
+  computed: {
+    ...mapState('booking', ['isLoading', 'orders']),
+  },
+
   async created() {
     try {
-      this.isLoading = true;
-      const { data } = await getOrders();
-      this.orders = data;
+      await this.getOrders();
     } catch (error) {
       this.$notify({
         type: 'error',
         title: 'The page has error during loading',
         text: error.message,
       });
-    } finally {
-      this.isLoading = false;
     }
   },
 };

@@ -2,9 +2,7 @@
   <header class="header">
     <Container>
       <div class="header__content">
-        <router-link to="/">
-          <Logo />
-        </router-link>
+        <Logo />
         <AuthActions v-if="!isLoggedIn" />
         <AccountActions v-else="isLoggedIn" :user="getUserData" />
       </div>

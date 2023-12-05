@@ -18,7 +18,7 @@
         placeholder="Password"
         class="form__input form__input--last"
       />
-      <Button class="form__button" type="submit" :loading="loading"
+      <Button class="form__button" type="submit" :loading="isLoading"
         >Enter</Button
       >
     </Form>
@@ -36,7 +36,7 @@ import {
   isRequired,
 } from '../../../utils/validationRules';
 import MainTitle from '../../shared/MainTitle.vue';
-import { mapActions } from 'vuex';
+import { mapActions, mapState } from 'vuex';
 
 export default {
   name: 'Login',
@@ -46,7 +46,6 @@ export default {
         email: '',
         password: '',
       },
-      loading: false,
     };
   },
   components: {
@@ -57,10 +56,11 @@ export default {
     MainTitle,
   },
   computed: {
+    ...mapState('auth', ['isLoading']),
+
     rules() {
       return { emailValidation, passwordValidation, isRequired };
     },
-
     emailRules() {
       return [this.rules.isRequired, this.rules.emailValidation];
     },
@@ -70,13 +70,13 @@ export default {
   },
   methods: {
     ...mapActions('auth', ['login']),
+
     async handleSubmit() {
       const isFormValid = this.$refs.form.validate();
       this.$refs.form.reset();
 
       if (isFormValid) {
         try {
-          this.loading = true;
           await this.login(this.formData);
 
           this.$router.push({ name: 'homepage' });
@@ -86,8 +86,6 @@ export default {
             title: 'Log in error',
             text: error.message,
           });
-        } finally {
-          this.loading = false;
         }
       }
     },
@@ -106,7 +104,7 @@ export default {
     margin-bottom: 18px;
   }
 }
-::v-deep .form {
+ .form {
   &__input {
     width: 350px;
 

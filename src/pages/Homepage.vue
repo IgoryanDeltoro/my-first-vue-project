@@ -4,15 +4,12 @@
       <Container>
         <ApartmentsFilterForm @data="filter" />
       </Container>
-      <Loading v-if="loading" />
-      <Container v-else="!loading">
+      <Loading v-if="isLoading" />
+      <Container v-else>
         <p class="homepage__inform" v-if="!filteredApartments.length">
           Apartments not found
         </p>
-        <ApartmentsList
-          v-else="filteredApartments.length"
-          :items="filteredApartments"
-        >
+        <ApartmentsList v-else :items="filteredApartments">
           <template v-slot:title>
             <MainTitle class="homepage__title"
               >Selection according to choice</MainTitle
@@ -37,11 +34,11 @@
 import ApartmentsFilterForm from '../components/apartment/ApartmentsFilterForm.vue';
 import ApartmentsItem from '../components/apartment/ApartmentsItem.vue';
 import ApartmentsList from '../components/apartment/ApartmentsList.vue';
-import { getApartments } from '../services/apartment.service';
 import Container from '../components/shared/Container.vue';
 import SectionWithHeaderFooterSpaces from '../components/shared/SectionWithHeader&FooterSpaces.vue';
 import MainTitle from '../components/shared/MainTitle.vue';
 import Loading from '../components/loaders/Loading.vue';
+import { mapState ,mapActions} from 'vuex';
 
 export default {
   name: 'App',
@@ -56,33 +53,23 @@ export default {
   },
   data() {
     return {
-      apartments: [],
-      loading: false,
       filters: {
         city: '',
         price: 0,
       },
     };
   },
-  async created() {
-    try {
-      this.loading = true;
-      const { data } = await getApartments();
-
-      this.apartments = data;
-    } catch (error) {
-      console.log(error);
-    } finally {
-      this.loading = false;
-    }
-  },
   computed: {
+    ...mapState('booking', ['isLoading','apartments']),
+
     filteredApartments() {
       return this.filterByCityName(this.filterByPrice(this.apartments));
     },
   },
-
   methods: {
+    ...mapActions('booking', ['getApartmentsList']),
+
+
     filter({ city, price }) {
       this.filters.city = city;
       this.filters.price = price;
@@ -101,6 +88,13 @@ export default {
         return apartment.price >= this.filters.price;
       });
     },
+  },
+  async created() {
+    try {
+       await this.getApartmentsList();
+    } catch (error) {
+      console.log(error);
+    }
   },
 };
 </script>

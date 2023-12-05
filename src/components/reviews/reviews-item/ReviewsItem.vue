@@ -3,7 +3,7 @@
     <div class="reviews-item__content">
       <ReviewsHeading :review="review" />
     </div>
-    <p class="reviews-item__descr">{{ review.content }}</p>
+    <p class="reviews-item__descr">{{ review.comment }}</p>
   </section>
 </template>
 
@@ -38,7 +38,6 @@ export default {
 
   &__descr {
     font-size: 16px;
-    font-weight: 500;
     line-height: 1.2;
   }
 }

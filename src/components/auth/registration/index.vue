@@ -34,7 +34,7 @@
         placeholder="Confirm password"
         class="form__input form__input--last"
       />
-      <Button class="form__button" type="submit" :loading="loading"
+      <Button class="form__button" type="submit" :loading="isLoading"
         >Enter</Button
       >
     </Form>
@@ -52,7 +52,7 @@ import {
   isRequired,
 } from '../../../utils/validationRules';
 import MainTitle from '../../shared/MainTitle.vue';
-import { mapActions } from 'vuex';
+import { mapActions, mapState } from 'vuex';
 
 export default {
   name: 'Registration',
@@ -64,7 +64,6 @@ export default {
         password: '',
         confirmPassword: '',
       },
-      loading: false,
     };
   },
   components: {
@@ -75,6 +74,8 @@ export default {
     MainTitle,
   },
   computed: {
+    ...mapState('auth', ['isLoading']),
+
     rules() {
       return { emailValidation, passwordValidation, isRequired };
     },
@@ -106,18 +107,15 @@ export default {
         const { name, email, password } = this.formData;
 
         try {
-          this.loading = true;
           await this.registerUser({ name, email, password });
 
-          this.$router.push({ name: 'homepage' });          
+          this.$router.push({ name: 'homepage' });
         } catch (error) {
           this.$notify({
             type: 'error',
             title: 'Registration error',
             text: error.message,
           });
-        } finally {
-          this.loading = false;
         }
       }
     },
@@ -136,7 +134,7 @@ export default {
     margin-bottom: 18px;
   }
 }
-::v-deep .form {
+ .form {
   &__input {
     width: 350px;
     margin-bottom: 23px;
