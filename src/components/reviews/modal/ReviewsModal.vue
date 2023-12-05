@@ -263,22 +263,11 @@ export default {
     }
   }
   .active &__container {
-    -webkit-animation: $scale-animation;
-    -moz-animation: $scale-animation;
+    animation: $scale-animation;
   }
 }
 
-@-webkit-keyframes scale {
-  0% {
-    opacity: 0;
-    -webkit-transform: scale(0.8);
-  }
-  100% {
-    opacity: 1;
-    -webkit-transform: scale(1);
-  }
-}
-@-moz-keyframes scale {
+@keyframes scale {
   0% {
     opacity: 0;
     -moz-transform: scale(0.8);

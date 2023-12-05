@@ -1,20 +1,16 @@
 <template>
   <span class="circle-loader">
-    <svg
-      class="preloader-icon"
-      viewBox="0 0 100 100"
-      :width="width"
-      :height="height"
-      :style="style"
-    >
-      <circle cx="50" cy="50" r="40" stroke-width="5" fill="none"></circle>
-    </svg>
+    <CircleIcon :width="width" :height="height" :style="style" />
   </span>
 </template>
 
 <script>
+import CircleIcon from '../../assets/svg/circle.svg';
 export default {
   name: 'Circle',
+  components: {
+    CircleIcon,
+  },
   props: {
     width: {
       type: [Number, String],

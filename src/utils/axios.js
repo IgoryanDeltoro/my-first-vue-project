@@ -3,9 +3,6 @@ import store from '../store/index';
 
 const axiosInstance = axios.create({
   baseURL: 'https://booking-cli.onrender.com/booking/',
-  // baseURL: 'http://localhost:4000/booking/',
-  // baseURL: 'https://apt-booking-api.herokuapp.com/',
-
 });
 
 axiosInstance.interceptors.request.use(

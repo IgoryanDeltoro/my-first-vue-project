@@ -85,8 +85,6 @@ export default {
   &__img-box {
     width: 45%;
     height: 190px;
-    /* border: 2px solid #e1efff; */
-    /* border-right: none; */
   }
   &__img {
     width: 100%;
@@ -100,8 +98,6 @@ export default {
     justify-content: space-between;
     width: 55%;
     padding: 20px;
-    /* border: 2px solid #e1efff; */
-    /* border-left: none; */
   }
   &__title {
     margin-bottom: 10px;
