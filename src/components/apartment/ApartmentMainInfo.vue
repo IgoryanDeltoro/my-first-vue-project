@@ -9,8 +9,9 @@
     </Skeleton>
     <p class="article__descr">{{ apartment.descr }}</p>
 
-    <div class="article__btn">
+    <div class="article__box-btn">
       <Button
+        class="article__btn"
         @click="handleBooking"
         v-if="!apartment.ordered.isOrdered"
         :loading="isLoading"
@@ -121,8 +122,11 @@ export default {
     line-height: 1.2;
     margin-bottom: 35px;
   }
-  &__btn {
+  &__box-btn {
     text-align: end;
+  }
+  &__btn {
+    width: 220px;
   }
   &__attention {
     font-size: 18px;
