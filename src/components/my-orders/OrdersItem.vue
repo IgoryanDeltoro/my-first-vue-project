@@ -15,11 +15,7 @@
         per night
       </div>
       <button @click="removeApartment" class="orders-item__delete-btn">
-        <img
-          class="orders-item__delete-img"
-          src="../../assets/svg/remove_icon.svg"
-          alt="Recycle Bin"
-        />
+        <RemoveIcon class="orders-item__delete-img" />
       </button>
     </div>
   </div>
@@ -30,12 +26,14 @@ import MainTitle from '../shared/MainTitle.vue';
 import { removeOrder } from '../../services/order.service';
 import { mapActions, mapState } from 'vuex';
 import Skeleton from '../Skeleton.vue';
+import RemoveIcon from '../../assets/svg/remove_icon.svg';
 
 export default {
   name: 'OrdersItem',
   components: {
     MainTitle,
     Skeleton,
+    RemoveIcon,
   },
   props: {
     order: {

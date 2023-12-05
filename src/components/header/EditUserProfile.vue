@@ -4,7 +4,7 @@
     <div class="form__img-box">
       <UserAvatar class="form__photo-img" :src="user.avatarURL" />
       <label class="form__layout">
-        <img class="form__img" src="../../assets/svg/plus.svg" alt="plus" />
+        <PlusIcon class="form__img" />
         <input
           class="form__upload-input"
           type="file"
@@ -32,6 +32,7 @@ import CustomInput from '../shared/CustomInput.vue';
 import Button from '../Button.vue';
 import { mapActions, mapState } from 'vuex';
 import CloseButton from '../CloseButton.vue';
+import PlusIcon from '../../assets/svg/plus.svg';
 
 export default {
   name: 'EditUserProfile',
@@ -41,6 +42,7 @@ export default {
     CustomInput,
     Button,
     CloseButton,
+    PlusIcon,
   },
   data() {
     return {

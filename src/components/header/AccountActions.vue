@@ -28,11 +28,7 @@
         </button>
       </li>
       <li class="account-action__item">
-        <img
-          class="account-action__icon"
-          src="../../assets/svg/email.svg"
-          alt="envelope"
-        />
+        <EmailIcon class="account-action__icon" />
         <span class="account-action__email">
           {{ user.email }}
         </span>
@@ -75,6 +71,7 @@ import OrdersIcon from '../../assets/svg/orders-icon.svg';
 import LogOutIcon from '../../assets/svg/logout.svg';
 import AvatarIcon from '../../assets/svg/avatar.svg';
 import CloseButton from '../CloseButton.vue';
+import EmailIcon from '../../assets/svg/email.svg';
 
 export default {
   components: {
@@ -85,6 +82,7 @@ export default {
     OrdersIcon,
     LogOutIcon,
     AvatarIcon,
+    EmailIcon,
     CloseButton,
   },
   data() {
@@ -225,7 +223,7 @@ export default {
     height: 15px;
     margin-right: 10px;
 
-    .account-action__item:hover:not(:nth-child(2)) & {
+    .account-action__item:hover:nth-child(n + 4) & {
       fill: $main-color;
     }
 
