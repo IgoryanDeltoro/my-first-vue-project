@@ -1,6 +1,7 @@
 <template>
   <form @submit.prevent="handelSubmit" class="form">
     <CustomSelect class="form__select" :items="cities" v-model="city" />
+    <CloseButton class="form__close-btn" />
     <CustomInput
       class="form__input"
       name="name"
@@ -22,12 +23,14 @@ import CustomInput from '../shared/CustomInput.vue';
 import CustomSelect from '../shared/CustomSelect.vue';
 import { getCities } from '../../services/apartment.service';
 import { isRequired, charLimit } from '../../utils/validationRules';
+import CloseButton from '../CloseButton.vue';
 export default {
   name: 'ApartmentsFilterForm',
   components: {
     CustomSelect,
     CustomInput,
     Button,
+    CloseButton,
   },
   data() {
     return {
@@ -52,32 +55,77 @@ export default {
   },
   methods: {
     handelSubmit() {
-      this.$emit('data', { price: this.price, city: this.city });
+      this.$emit('data', {
+        price: this.price,
+        city: this.city,
+        isOpen: 'form__filter--close',
+      });
     },
   },
 };
 </script>
 
 <style lang="scss" scoped>
+@import '../../assets/scss/index.scss';
+
 .form {
   display: flex;
-  margin-bottom: 40px;
 
-  &__select {
-    width: 220px;
+  @include max-width(767px) {
+    flex-direction: column;
+    position: absolute;
+    width: 280px;
+    padding: 55px 20px;
+    top: 75px;
+    right: 15px;
+    border: 2px solid $main-color;
+    background-color: $white-color;
+    z-index: 100;
 
-    margin-right: 30px;
+    &__select {
+      width: 100%;
+      margin-bottom: 30px;
+    }
+
+    &__input {
+      width: 100%;
+      margin-bottom: 30px;
+    }
+    &__button {
+      width: 100%;
+    }
+    &__close-btn {
+      position: absolute;
+      top: 5px;
+      right: 5px;
+      width: 40px;
+      height: 40px;
+    }
+    &__filter {
+      &--open {
+        opacity: 1;
+      }
+    }
   }
 
-  &__button {
-    margin-left: auto;
-  }
-  &__input {
-    width: 220px;
-    margin-right: auto;
-  }
-  &__button {
-    width: 220px;
+  @include tablet {
+    margin-bottom: 40px;
+
+    &__select {
+      width: 220px;
+      margin-right: 30px;
+    }
+
+    &__button {
+      margin-left: auto;
+    }
+    &__input {
+      width: 220px;
+      margin-right: auto;
+    }
+    &__button {
+      width: 220px;
+    }
   }
 }
 </style>

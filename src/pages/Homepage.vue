@@ -2,13 +2,18 @@
   <main class="homepage">
     <SectionWithHeaderFooterSpaces>
       <Container>
-        <ApartmentsFilterForm @data="filter" />
+        <Button class="homepage__filter-btn" @click="filterOpener"
+          >filter</Button
+        >
+        <ApartmentsFilterForm :class="isOpen"  @data="filter" />
       </Container>
+
       <Loading v-if="isLoading" />
       <Container v-else>
         <p class="homepage__inform" v-if="!filteredApartments.length">
           Apartments not found
         </p>
+
         <ApartmentsList v-else :items="filteredApartments">
           <template v-slot:title>
             <MainTitle class="homepage__title"
@@ -39,6 +44,7 @@ import SectionWithHeaderFooterSpaces from '../components/shared/SectionWithHeade
 import MainTitle from '../components/shared/MainTitle.vue';
 import Loading from '../components/loaders/Loading.vue';
 import { mapState, mapActions } from 'vuex';
+import Button from '../components/Button.vue';
 
 export default {
   name: 'App',
@@ -50,6 +56,7 @@ export default {
     SectionWithHeaderFooterSpaces,
     MainTitle,
     Loading,
+    Button,
   },
   data() {
     return {
@@ -57,8 +64,10 @@ export default {
         city: '',
         price: 0,
       },
+      isOpen:'',
     };
   },
+
   computed: {
     ...mapState('booking', ['isLoading', 'apartments']),
 
@@ -69,9 +78,10 @@ export default {
   methods: {
     ...mapActions('booking', ['getApartmentsList']),
 
-    filter({ city, price }) {
+    filter({ city, price, isOpen }) {
       this.filters.city = city;
       this.filters.price = price;
+      this.isOpen = isOpen;
     },
     filterByCityName(apartments) {
       return apartments.filter(apartment => {
@@ -87,6 +97,9 @@ export default {
         return apartment.price >= this.filters.price;
       });
     },
+    filterOpener() {
+      this.isOpen = 'form__filter--open';
+    },
   },
   async created() {
     try {
@@ -98,16 +111,30 @@ export default {
 };
 </script>
 
-<style>
-.homepage__title {
-  margin-bottom: 20px;
-}
-.homepage__inform {
-  color: red;
-  text-align: center;
-  font-size: large;
-}
-.homepage__loader {
-  margin-top: 50px;
+<style lang="scss" scoped>
+@import '../assets/scss/index.scss';
+.homepage {
+  &__filter-btn {
+    display: block;
+    position: absolute;
+    top: 75px;
+    right: 15px;
+
+    @include tablet {
+      opacity: 0;
+    }
+  }
+
+  &__title {
+    margin-bottom: 20px;
+  }
+  &__inform {
+    color: red;
+    text-align: center;
+    font-size: large;
+  }
+  &__loader {
+    margin-top: 50px;
+  }
 }
 </style>
