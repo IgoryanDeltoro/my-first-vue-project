@@ -64,7 +64,7 @@ export default {
         city: '',
         price: 0,
       },
-      isOpen:'',
+      isOpen:'form__filter--close',
     };
   },
 
