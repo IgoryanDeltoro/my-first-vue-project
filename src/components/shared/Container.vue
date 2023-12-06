@@ -14,17 +14,18 @@ export default {
 @import '../../assets/scss/index.scss';
 .container {
   margin: 0 auto;
+  padding: 0 15px;
 
   @include mobile {
-        max-width: $mobile;
-    }
+    max-width: $mobile;
+  }
 
-    @include tablet {
-        max-width: $tablet;
-    }
+  @include tablet {
+    max-width: $tablet;
+  }
 
-    @include desktop {
-        max-width: $desktop;
-    }
+  @include desktop {
+    max-width: $desktop;
+  }
 }
 </style>
