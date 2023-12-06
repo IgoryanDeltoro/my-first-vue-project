@@ -27,5 +27,6 @@ export default {
 .apartments-list {
   display: flex;
   flex-wrap: wrap;
+  gap: 30px;
 }
 </style>

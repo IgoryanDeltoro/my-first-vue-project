@@ -38,7 +38,7 @@ import Container from '../components/shared/Container.vue';
 import SectionWithHeaderFooterSpaces from '../components/shared/SectionWithHeader&FooterSpaces.vue';
 import MainTitle from '../components/shared/MainTitle.vue';
 import Loading from '../components/loaders/Loading.vue';
-import { mapState ,mapActions} from 'vuex';
+import { mapState, mapActions } from 'vuex';
 
 export default {
   name: 'App',
@@ -60,7 +60,7 @@ export default {
     };
   },
   computed: {
-    ...mapState('booking', ['isLoading','apartments']),
+    ...mapState('booking', ['isLoading', 'apartments']),
 
     filteredApartments() {
       return this.filterByCityName(this.filterByPrice(this.apartments));
@@ -68,7 +68,6 @@ export default {
   },
   methods: {
     ...mapActions('booking', ['getApartmentsList']),
-
 
     filter({ city, price }) {
       this.filters.city = city;
@@ -91,7 +90,7 @@ export default {
   },
   async created() {
     try {
-       await this.getApartmentsList();
+      await this.getApartmentsList();
     } catch (error) {
       console.log(error);
     }

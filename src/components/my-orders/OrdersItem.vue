@@ -74,8 +74,6 @@ export default {
 .orders-item {
   margin-bottom: 20px;
   display: flex;
-  -webkit-transform: scale(1);
-  -moz-transform: scale(1);
   transform: scale(1);
   transition-duration: $transition-time;
   box-shadow: $cards-box-shadow;
@@ -134,8 +132,6 @@ export default {
   }
 
   &:hover {
-    -webkit-transform: scale(1.05);
-    -moz-transform: scale(1.05);
     transform: scale(1.05);
     box-shadow: $box-shadow-out;
   }
