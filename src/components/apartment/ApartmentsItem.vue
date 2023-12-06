@@ -63,8 +63,8 @@ export default {
 @import '../../assets/scss/index.scss';
 .apartment-item {
   @include max-width(767px) {
-    width: 100%;
-    height: 100%;
+    max-width: 100%;
+    height: 200px;
   }
   @include tablet {
     width: 350px;
