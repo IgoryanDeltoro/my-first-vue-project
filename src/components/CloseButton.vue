@@ -21,7 +21,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '.././assets/scss/variables.scss';
+@import '.././assets/scss/index.scss';
 
 .close-button {
   display: flex;

@@ -90,7 +90,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '../../assets/scss/variables.scss';
+@import '../../assets/scss/index.scss';
 .article {
   width: 730px;
 

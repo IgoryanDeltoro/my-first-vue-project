@@ -89,7 +89,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '../../assets/scss/variables.scss';
+@import '../../assets/scss/index.scss';
 .wrapper-input {
   position: relative;
   display: inline-flex;

@@ -85,7 +85,7 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-@import '../../assets/scss/variables.scss';
+@import '../../assets/scss/index.scss';
 .form {
   position: absolute;
   top: -1px;

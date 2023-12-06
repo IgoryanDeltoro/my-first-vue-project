@@ -125,7 +125,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '../../../assets/scss/variables.scss';
+@import '../../../assets/scss/index.scss';
 .modal {
   position: fixed;
   z-index: 9998;

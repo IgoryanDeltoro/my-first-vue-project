@@ -11,8 +11,20 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import '../../assets/scss/index.scss';
 .container {
-  width: 1110px; 
   margin: 0 auto;
+
+  @include mobile {
+        max-width: $mobile;
+    }
+
+    @include tablet {
+        max-width: $tablet;
+    }
+
+    @include desktop {
+        max-width: $desktop;
+    }
 }
 </style>

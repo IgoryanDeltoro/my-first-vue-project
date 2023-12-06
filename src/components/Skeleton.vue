@@ -10,7 +10,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '.././assets/scss/variables.scss';
+@import '.././assets/scss/index.scss';
 .skeleton {
   animation: pulse-bg 1000ms linear infinite ;
 }

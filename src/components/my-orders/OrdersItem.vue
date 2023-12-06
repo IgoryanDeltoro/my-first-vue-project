@@ -70,7 +70,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '../../assets/scss/variables.scss';
+@import '../../assets/scss/index.scss';
 .orders-item {
   margin-bottom: 20px;
   display: flex;
