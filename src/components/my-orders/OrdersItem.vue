@@ -78,9 +78,19 @@ export default {
   transition-duration: $transition-time;
   box-shadow: $cards-box-shadow;
 
+  @include max-width(767px) {
+    flex-direction: column;
+  }
+
   &__img-box {
-    width: 45%;
     height: 190px;
+
+    @include max-width(767px) {
+      width: 100%;
+    }
+    @include tablet {
+      width: 45%;
+    }
   }
   &__img {
     width: 100%;
@@ -92,8 +102,14 @@ export default {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    width: 55%;
     padding: 20px;
+
+    @include max-width(767px) {
+      width: 100%;
+    }
+    @include tablet {
+      width: 45%;
+    }
   }
   &__title {
     margin-bottom: 10px;
