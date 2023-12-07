@@ -1,5 +1,5 @@
 <template>
-  <div class="orders-item" @mouseleave="checkElement" >
+  <div class="orders-item" @touchmove="checkElement">
     <Skeleton class="orders-item__img-box">
       <img class="orders-item__img" :src="order.imgUrl" alt="Apartment photo" />
     </Skeleton>
@@ -157,18 +157,6 @@ export default {
     transform: scale(1.05);
     box-shadow: $box-shadow-out;
   }
-/* 
-  @include max-width(1199px) {
-    &.visible:hover &__delete-btn {
-      opacity: 1;
-      color: $main-color;
-    }
-
-    &.visible:hover {
-      transform: scale(1.05);
-      box-shadow: $box-shadow-out;
-    }
-  } */
 }
 
 @keyframes pulse-bg {
