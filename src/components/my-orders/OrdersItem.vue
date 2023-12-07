@@ -108,7 +108,7 @@ export default {
       width: 100%;
     }
     @include tablet {
-      width: 45%;
+      width: 55%;
     }
   }
   &__title {
