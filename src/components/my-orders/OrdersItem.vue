@@ -1,5 +1,5 @@
 <template>
-  <div class="orders-item">
+  <div class="orders-item" @mouseleave="checkElement" >
     <Skeleton class="orders-item__img-box">
       <img class="orders-item__img" :src="order.imgUrl" alt="Apartment photo" />
     </Skeleton>
@@ -27,6 +27,7 @@ import { removeOrder } from '../../services/order.service';
 import { mapActions, mapState } from 'vuex';
 import Skeleton from '../Skeleton.vue';
 import RemoveIcon from '../../assets/svg/remove_icon.svg';
+import checkScroll from '../../utils/checkScroll';
 
 export default {
   name: 'OrdersItem',
@@ -35,18 +36,23 @@ export default {
     Skeleton,
     RemoveIcon,
   },
+
   props: {
     order: {
       type: Object,
       required: true,
     },
   },
+
   computed: {
     ...mapState('booking', ['isLoading']),
   },
   methods: {
     ...mapActions('booking', ['getOrders']),
-
+    checkElement(e) {
+      console.log(e);
+      checkScroll();
+    },
     async removeApartment() {
       try {
         await removeOrder(this.order.id);
@@ -151,6 +157,18 @@ export default {
     transform: scale(1.05);
     box-shadow: $box-shadow-out;
   }
+/* 
+  @include max-width(1199px) {
+    &.visible:hover &__delete-btn {
+      opacity: 1;
+      color: $main-color;
+    }
+
+    &.visible:hover {
+      transform: scale(1.05);
+      box-shadow: $box-shadow-out;
+    }
+  } */
 }
 
 @keyframes pulse-bg {

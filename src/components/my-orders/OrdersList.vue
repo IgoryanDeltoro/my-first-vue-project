@@ -7,7 +7,6 @@
     />
   </div>
 </template>
-
 <script>
 import OrdersItem from './OrdersItem.vue';
 
