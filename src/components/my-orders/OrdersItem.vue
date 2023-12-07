@@ -1,5 +1,5 @@
 <template>
-  <div class="orders-item" @touchmove="checkElement">
+  <div class="orders-item" >
     <Skeleton class="orders-item__img-box">
       <img class="orders-item__img" :src="order.imgUrl" alt="Apartment photo" />
     </Skeleton>
@@ -49,10 +49,7 @@ export default {
   },
   methods: {
     ...mapActions('booking', ['getOrders']),
-    checkElement(e) {
-      console.log(e);
-      checkScroll();
-    },
+
     async removeApartment() {
       try {
         await removeOrder(this.order.id);
@@ -156,6 +153,20 @@ export default {
   &:hover {
     transform: scale(1.05);
     box-shadow: $box-shadow-out;
+  }
+
+  
+
+  @include max-width(767px) {
+    &.centered &__delete-btn {
+      opacity: 1;
+      color: $main-color;
+    }
+
+    &.centered {
+      transform: scale(1.05);
+      box-shadow: $box-shadow-out;
+    }
   }
 }
 
