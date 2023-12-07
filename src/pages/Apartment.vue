@@ -10,7 +10,10 @@
               class="apartment-page__owner"
               :owner="apartment.owner"
             />
-            <Reviews :reviews="apartment.reviews" />
+            <Reviews
+              class="apartment-page__reviews"
+              :reviews="apartment.reviews"
+            />
           </div>
         </div>
       </Container>
@@ -55,19 +58,48 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import '../assets/scss/index.scss';
 .apartment-page {
   display: flex;
   align-items: flex-start;
 
-  &__owner {
-    margin-bottom: 20px;
+  @include max-width($desktop) {
+    flex-direction: column;
+    gap: 30px;
   }
 
   &__additional-info {
-    margin-left: 30px;
-    max-width: 350px;
     flex-grow: 0;
     flex-shrink: 1;
+
+    @include max-width(767px) {
+      max-width: 350px;
+    }
+
+    @include min-max-width(768px, 1199px) {
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+    }
+    @include desktop {
+      margin-left: 30px;
+      max-width: 350px;
+    }
+  }
+
+  &__owner {
+    margin-bottom: 20px;
+
+    @include min-max-width(768px, 1199px) {
+      margin-bottom: 0;
+      width: 350px;
+    }
+  }
+
+  &__reviews {
+    @include min-max-width(768px, 1199px) {
+      width: 350px;
+    }
   }
 }
 </style>

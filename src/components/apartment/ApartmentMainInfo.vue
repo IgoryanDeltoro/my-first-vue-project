@@ -92,7 +92,13 @@ export default {
 <style lang="scss" scoped>
 @import '../../assets/scss/index.scss';
 .article {
-  width: 730px;
+  @include max-width(767px) {
+    width: 100%;
+  }
+
+  @include desktop {
+    width: 730px;
+  }
 
   &__title {
     max-width: calc(100% - 120px);
@@ -109,8 +115,12 @@ export default {
   }
   &__skelton {
     width: 100%;
-    height: 410px;
+    height: 80%;
     margin-bottom: 30px;
+
+    @include tablet {
+      height: 410px;
+    }
   }
   &__img {
     width: 100%;
