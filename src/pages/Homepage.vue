@@ -7,28 +7,16 @@
         >
         <ApartmentsFilterForm :class="isOpen" @data="filter" />
       </Container>
-
       <Loading v-if="isLoading" />
       <Container v-else>
         <p class="homepage__inform" v-if="!filteredApartments.length">
           Apartments not found
         </p>
-
         <ApartmentsList v-else :items="filteredApartments">
           <template v-slot:title>
             <MainTitle class="homepage__title"
               >Selection according to choice</MainTitle
             >
-          </template>
-          <template v-slot:apartment="{ apartment }">
-            <ApartmentsItem
-              :description="apartment.descr"
-              :price="apartment.price"
-              :rating="apartment.rating"
-              :imgSrc="apartment.imgUrl"
-              :id="apartment.id"
-              :key="apartment.id"
-            />
           </template>
         </ApartmentsList>
       </Container>

@@ -125,8 +125,16 @@ export default {
       padding: 20px;
     }
 
+    .centered & {
+      @include max-width(767px) {
+        opacity: 1;
+      }
+    }
+
     &:hover {
-      opacity: 1;
+      @include tablet {
+        opacity: 1;
+      }
     }
   }
   &__rating {
