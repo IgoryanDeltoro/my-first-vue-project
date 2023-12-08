@@ -19,6 +19,7 @@ export default {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  padding: 0 15px;
   background: url('../../assets/images/bg/layer.jpg') no-repeat;
   background-size: cover;
   background-position: center;

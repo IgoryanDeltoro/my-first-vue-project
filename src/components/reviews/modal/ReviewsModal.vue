@@ -139,6 +139,7 @@ export default {
   &__wrapper {
     display: table-cell;
     vertical-align: middle;
+    padding: 0 15px;
   }
 
   &__container {
