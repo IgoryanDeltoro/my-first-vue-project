@@ -2,7 +2,7 @@
   <div class="orders-list">
     <OrdersItem
       v-for="(order, index) in orders"
-      :key="index"
+      :key="order.id"
       :order="order.apartment"
       :class="{ centered: index === activeIndex }"
     />
@@ -37,14 +37,12 @@ export default {
   methods: {
     handleScroll() {
       const windowHeight = window.innerHeight;
-      const center = windowHeight / 2;
-      console.log(center);
+      const center = windowHeight / 3;
 
       [...this.$el.children].map((item, index) => {
         const rect = item.getBoundingClientRect();
         const elementCenter = rect.top + rect.height /2;
-        console.log(elementCenter);
-        if (elementCenter >= 0 && elementCenter <= center +120 ) {
+        if (elementCenter >= center && elementCenter <= center + center ) {
           this.activeIndex = index;
         }
       });

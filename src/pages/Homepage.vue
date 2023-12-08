@@ -5,7 +5,7 @@
         <Button class="homepage__filter-btn" @click="filterOpener"
           >filter</Button
         >
-        <ApartmentsFilterForm :class="isOpen"  @data="filter" />
+        <ApartmentsFilterForm :class="isOpen" @data="filter" />
       </Container>
 
       <Loading v-if="isLoading" />
@@ -64,10 +64,9 @@ export default {
         city: '',
         price: 0,
       },
-      isOpen:'form__filter--close',
+      isOpen: 'form__filter--close',
     };
   },
-
   computed: {
     ...mapState('booking', ['isLoading', 'apartments']),
 

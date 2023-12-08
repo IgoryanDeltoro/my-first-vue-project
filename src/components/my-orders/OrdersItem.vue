@@ -1,5 +1,5 @@
 <template>
-  <div class="orders-item" >
+  <div class="orders-item">
     <Skeleton class="orders-item__img-box">
       <img class="orders-item__img" :src="order.imgUrl" alt="Apartment photo" />
     </Skeleton>
@@ -145,17 +145,6 @@ export default {
     width: 25px;
     height: 25px;
   }
-  &:hover &__delete-btn {
-    opacity: 1;
-    color: $main-color;
-  }
-
-  &:hover {
-    transform: scale(1.05);
-    box-shadow: $box-shadow-out;
-  }
-
-  
 
   @include max-width(767px) {
     &.centered &__delete-btn {
@@ -164,6 +153,18 @@ export default {
     }
 
     &.centered {
+      transform: scale(1.05);
+      box-shadow: $box-shadow-out;
+    }
+  }
+
+  @include tablet {
+    &:hover &__delete-btn {
+      opacity: 1;
+      color: $main-color;
+    }
+
+    &:hover {
       transform: scale(1.05);
       box-shadow: $box-shadow-out;
     }

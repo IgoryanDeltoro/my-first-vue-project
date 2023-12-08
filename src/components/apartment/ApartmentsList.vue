@@ -2,7 +2,7 @@
   <slot name="title"></slot>
   <div class="apartments-list">
     <template v-for="apartment in items">
-      <slot name="apartment" :apartment="apartment"></slot>
+      <slot name="apartment" :index="index" :apartment="apartment"></slot>
     </template>
   </div>
 </template>
