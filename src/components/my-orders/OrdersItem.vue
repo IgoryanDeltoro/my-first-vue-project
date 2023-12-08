@@ -27,7 +27,6 @@ import { removeOrder } from '../../services/order.service';
 import { mapActions, mapState } from 'vuex';
 import Skeleton from '../Skeleton.vue';
 import RemoveIcon from '../../assets/svg/remove_icon.svg';
-import checkScroll from '../../utils/checkScroll';
 
 export default {
   name: 'OrdersItem',

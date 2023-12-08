@@ -38,12 +38,27 @@ export default {
     handleScroll() {
       const windowHeight = window.innerHeight;
       const center = windowHeight / 3;
-
-      [...this.$el.children].map((item, index) => {
+      const elements = [...this.$el.children];
+      
+      elements.map((item, index) => {
         const rect = item.getBoundingClientRect();
-        const elementCenter = rect.top + rect.height /2;
-        if (elementCenter >= center && elementCenter <= center + center ) {
-          this.activeIndex = index;
+        const elementCenter = rect.top + rect.height / 2;
+
+        if (index < 1) {
+          if (elementCenter > 0 && elementCenter < center ) {
+            this.activeIndex = index;
+          }
+        } else if (index >= 1 && index <= elements.length - 1) {
+          if (elementCenter >= center && elementCenter <= center + center) {
+            this.activeIndex = index;
+          }
+        } else if (index > elements.length - 1) {
+          if (
+            elementCenter >= center + center &&
+            elementCenter <= windowHeight 
+          ) {
+            this.activeIndex = index;
+          }
         }
       });
     },
