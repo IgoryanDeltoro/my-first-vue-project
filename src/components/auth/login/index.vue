@@ -104,9 +104,9 @@ export default {
     margin-bottom: 18px;
   }
 }
- .form {
+.form {
   &__input {
-    width: 350px;
+    width: 100%;
 
     &--first {
       margin-bottom: 23px;

@@ -1,6 +1,6 @@
 <template>
-  <AuthContainer class="login">
-    <MainTitle class="login__title">Registration</MainTitle>
+  <AuthContainer class="registration">
+    <MainTitle class="registration__title">Registration</MainTitle>
     <Form ref="form" @:submit.prevent="handleSubmit">
       <CustomInput
         :rules="nameRules"
@@ -124,7 +124,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.login {
+.registration {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -136,7 +136,7 @@ export default {
 }
  .form {
   &__input {
-    width: 350px;
+    width: 100%;
     margin-bottom: 23px;
 
     &--last {
