@@ -4,10 +4,7 @@
       <notifications />
       <Header />
       <router-view></router-view>
-      <ReviewsModal
-        v-if="isShowModal"
-        :rating="rating"
-      />
+      <ReviewsModal v-if="isShowModal" :rating="rating" />
     </div>
     <Footer />
   </div>
