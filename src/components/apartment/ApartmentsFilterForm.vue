@@ -58,7 +58,7 @@ export default {
       this.$emit('data', {
         price: this.price,
         city: this.city,
-        isOpen: 'form__filter--close',
+        isOpen: false,
       });
     },
   },
@@ -101,10 +101,9 @@ export default {
       width: 40px;
       height: 40px;
     }
-    &__filter {
-      &--open {
-        opacity: 1;
-      }
+
+    &.opened {
+      opacity: 1;
     }
   }
 

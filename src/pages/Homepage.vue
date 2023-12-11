@@ -5,7 +5,10 @@
         <Button class="homepage__filter-btn" @click="filterOpener"
           >filter</Button
         >
-        <ApartmentsFilterForm :class="isOpen" @data="filter" />
+        <ApartmentsFilterForm
+          :class="isOpen ? 'opened' : 'closed'"
+          @data="filter"
+        />
       </Container>
       <Loading v-if="isLoading" />
       <Container v-else>
@@ -52,7 +55,7 @@ export default {
         city: '',
         price: 0,
       },
-      isOpen: 'form__filter--close',
+      isOpen: false,
     };
   },
   computed: {
@@ -85,7 +88,7 @@ export default {
       });
     },
     filterOpener() {
-      this.isOpen = 'form__filter--open';
+      this.isOpen = true;
     },
   },
   async created() {
