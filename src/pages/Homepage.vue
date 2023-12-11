@@ -39,7 +39,7 @@ import MainTitle from '../components/shared/MainTitle.vue';
 import Loading from '../components/loaders/Loading.vue';
 import { mapState, mapActions } from 'vuex';
 import Button from '../components/Button.vue';
-import Pagination from '../components/apartment/pagination.vue';
+import Pagination from '../components/apartment/Pagination.vue';
 
 export default {
   name: 'App',
