@@ -29,6 +29,7 @@ export default {
     ...mapMutations('booking', ['SET_CURRENT_PAGE']),
 
     async onClickHandler() {
+      this.$router.push({ path: '', query: { page: this.currentPage } });
       this.SET_CURRENT_PAGE(this.currentPage);
     },
   },
@@ -38,8 +39,6 @@ export default {
 <style lang="scss">
 @import '../../assets/scss/variables.scss';
 
-ul#componentContainer.pagination-container {
-}
 .btn {
   height: 40px;
   width: 40px;
