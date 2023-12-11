@@ -6,10 +6,11 @@ import {
 } from '../../services/apartment.service';
 
 const initialState = {
-  apartments: [],
+  allApartments: {},
   orders: [],
   apartment: {},
   isLoading: false,
+  currentPage: 1,
 };
 
 export default {
@@ -18,13 +19,16 @@ export default {
   getters: {},
   mutations: {
     SET_APARTMENTS_LIST(state, payload) {
-      state.apartments = payload;
+      state.allApartments = payload;
     },
     SET_APARTMENTS_ORDERS(state, payload) {
       state.orders = payload;
     },
     SET_APARTMENT_BY_ID(state, payload) {
       state.apartment = payload;
+    },
+    SET_CURRENT_PAGE(state, payload) {
+      state.currentPage = payload;
     },
     SET_LOADING(state) {
       state.isLoading = true;
@@ -34,9 +38,9 @@ export default {
     },
   },
   actions: {
-    async getApartmentsList({ commit }, payload) {
+    async getApartmentsList({ state, commit }) {
       commit('SET_LOADING');
-      const { data } = await getApartments(payload);
+      const { data } = await getApartments(state.currentPage);
       commit('SET_APARTMENTS_LIST', data);
       commit('UNSET_LOADING');
     },
