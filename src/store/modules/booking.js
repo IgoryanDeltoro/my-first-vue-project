@@ -11,6 +11,7 @@ const initialState = {
   apartment: {},
   isLoading: false,
   currentPage: 1,
+  limitItems: 4,
 };
 
 export default {
@@ -27,8 +28,9 @@ export default {
     SET_APARTMENT_BY_ID(state, payload) {
       state.apartment = payload;
     },
-    SET_CURRENT_PAGE(state, payload) {
-      state.currentPage = payload;
+    SET_CURRENT_PAGE(state, { page, limit }) {
+      state.currentPage = page;
+      state.items = limit;
     },
     SET_LOADING(state) {
       state.isLoading = true;
@@ -40,7 +42,10 @@ export default {
   actions: {
     async getApartmentsList({ state, commit }) {
       commit('SET_LOADING');
-      const { data } = await getApartments(state.currentPage);
+      const { data } = await getApartments({
+        page: state.currentPage,
+        limit: state.limitItems,
+      });
       commit('SET_APARTMENTS_LIST', data);
       commit('UNSET_LOADING');
     },

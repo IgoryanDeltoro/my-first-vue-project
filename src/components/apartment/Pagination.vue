@@ -23,14 +23,18 @@ export default {
   data() {
     return {
       currentPage: ref(1),
+      limitItems: 4,
     };
   },
   methods: {
     ...mapMutations('booking', ['SET_CURRENT_PAGE']),
 
     async onClickHandler() {
-      this.$router.push({ path: '', query: { page: this.currentPage } });
-      this.SET_CURRENT_PAGE(this.currentPage);
+      this.$router.push({
+        path: '',
+        query: { page: this.currentPage, limit: this.limitItems },
+      });
+      this.SET_CURRENT_PAGE({ page: this.currentPage, limit: this.limitItems });
     },
   },
 };
