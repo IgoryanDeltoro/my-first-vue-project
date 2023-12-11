@@ -12,6 +12,7 @@
     "@kyvg/vue3-notification": "^3.0.2",
     "axios": "^1.5.1",
     "vue": "^3.3.7",
+    "vue-awesome-paginate": "^1.1.46",
     "vue-router": "^4.2.5",
     "vuex": "^4.1.0"
   },
