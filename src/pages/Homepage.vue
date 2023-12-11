@@ -23,7 +23,7 @@
           </template>
         </ApartmentsList>
       </Container>
-      <Container>
+      <Container v-show="!isLoading">
         <Pagination class="homepage__pagination" />
       </Container>
     </SectionWithHeaderFooterSpaces>
@@ -139,6 +139,7 @@ export default {
     margin-top: 50px;
   }
   &__pagination {
+    position: relative;
     text-align: center;
     margin-top: 50px;
   }
