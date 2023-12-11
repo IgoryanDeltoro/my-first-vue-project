@@ -34,9 +34,9 @@ export default {
     },
   },
   actions: {
-    async getApartmentsList({ commit }) {
+    async getApartmentsList({ commit }, payload) {
       commit('SET_LOADING');
-      const { data } = await getApartments();
+      const { data } = await getApartments(payload);
       commit('SET_APARTMENTS_LIST', data);
       commit('UNSET_LOADING');
     },
@@ -46,9 +46,9 @@ export default {
       commit('SET_APARTMENTS_ORDERS', data);
       commit('UNSET_LOADING');
     },
-    async getApartmentById({ commit }, id) {
+    async getApartmentById({ commit }, payload) {
       commit('SET_LOADING');
-      const { data } = await getApartmentById(id);
+      const { data } = await getApartmentById(payload);
       commit('SET_APARTMENT_BY_ID', data);
       commit('UNSET_LOADING');
     },

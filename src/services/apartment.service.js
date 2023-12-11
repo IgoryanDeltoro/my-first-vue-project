@@ -1,7 +1,7 @@
 import axios from '../utils/axios';
 
-export const getApartments = () => {
-  return axios.get('/apartments');
+export const getApartments = data => {
+  return axios.get(`/apartments?page=${data}`);
 };
 
 export const getApartmentById = id => {

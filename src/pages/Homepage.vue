@@ -92,8 +92,9 @@ export default {
     },
   },
   async created() {
+    const { page, limit } = this.$route.params;
     try {
-      await this.getApartmentsList();
+      await this.getApartmentsList({ page, limit });
     } catch (error) {
       console.log(error);
     }
