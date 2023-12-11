@@ -23,6 +23,9 @@
           </template>
         </ApartmentsList>
       </Container>
+      <Container>
+        <Pagination class="homepage__pagination" />
+      </Container>
     </SectionWithHeaderFooterSpaces>
   </main>
 </template>
@@ -36,6 +39,7 @@ import MainTitle from '../components/shared/MainTitle.vue';
 import Loading from '../components/loaders/Loading.vue';
 import { mapState, mapActions } from 'vuex';
 import Button from '../components/Button.vue';
+import Pagination from '../components/apartment/pagination.vue';
 
 export default {
   name: 'App',
@@ -48,6 +52,7 @@ export default {
     MainTitle,
     Loading,
     Button,
+    Pagination,
   },
   data() {
     return {
@@ -58,11 +63,18 @@ export default {
       isOpen: false,
     };
   },
+  watch: {
+    currentPage() {
+      this.getAllApartments();
+    },
+  },
   computed: {
-    ...mapState('booking', ['isLoading', 'apartments']),
+    ...mapState('booking', ['isLoading', 'allApartments', 'currentPage']),
 
     filteredApartments() {
-      return this.filterByCityName(this.filterByPrice(this.apartments));
+      return this.filterByCityName(
+        this.filterByPrice(this.allApartments.apartments)
+      );
     },
   },
   methods: {
@@ -90,14 +102,13 @@ export default {
     filterOpener() {
       this.isOpen = true;
     },
-  },
-  async created() {
-    const { page, limit } = this.$route.params;
-    try {
-      await this.getApartmentsList({ page, limit });
-    } catch (error) {
-      console.log(error);
-    }
+    async getAllApartments() {
+      try {
+        await this.getApartmentsList();
+      } catch (error) {
+        console.log(error);
+      }
+    },
   },
 };
 </script>
@@ -125,6 +136,10 @@ export default {
     font-size: large;
   }
   &__loader {
+    margin-top: 50px;
+  }
+  &__pagination {
+    text-align: center;
     margin-top: 50px;
   }
 }
