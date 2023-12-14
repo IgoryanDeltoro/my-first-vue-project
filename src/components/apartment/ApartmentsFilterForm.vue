@@ -1,12 +1,12 @@
 <template>
   <form @submit.prevent="handelSubmit" class="form">
-    <CustomSelect class="form__select" :items="cities" v-model="city" />
+    <CustomSelect class="form__select" :items="cities" v-model="filters.city" />
     <CloseButton class="form__close-btn" />
     <CustomInput
       class="form__input"
       name="name"
       type="number"
-      v-model="price"
+      v-model="filters.price"
       error-message="this field is empty"
       :placeholder="'Price, from'"
       :rules="rules"
@@ -24,6 +24,8 @@ import CustomSelect from '../shared/CustomSelect.vue';
 import { getCities } from '../../services/apartment.service';
 import { isRequired, charLimit } from '../../utils/validationRules';
 import CloseButton from '../CloseButton.vue';
+import { mapActions } from 'vuex';
+
 export default {
   name: 'ApartmentsFilterForm',
   components: {
@@ -35,8 +37,7 @@ export default {
   data() {
     return {
       cities: [],
-      price: '',
-      city: '',
+      filters: {},
     };
   },
   async created() {
@@ -47,7 +48,6 @@ export default {
       console.log(error);
     }
   },
-
   computed: {
     rules() {
       return [isRequired, charLimit(5)];
@@ -55,11 +55,19 @@ export default {
   },
   methods: {
     handelSubmit() {
+      const { page, limit } = this.$route.query;
+
+      this.$router.push({
+        path: '',
+        query: {
+          ...this.filters,
+        },
+      });
+
       this.$emit('data', {
-        price: this.price,
-        city: this.city,
         isOpen: false,
       });
+
     },
   },
 };

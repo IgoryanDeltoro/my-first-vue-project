@@ -12,10 +12,10 @@
       </Container>
       <Loading v-if="isLoading" />
       <Container v-else>
-        <p class="homepage__inform" v-if="!filteredApartments.length">
+        <p class="homepage__inform" v-if="!allApartments.apartments.length">
           Apartments not found
         </p>
-        <ApartmentsList v-else :items="filteredApartments">
+        <ApartmentsList v-else :items="allApartments.apartments">
           <template v-slot:title>
             <MainTitle class="homepage__title"
               >Selection according to choice</MainTitle
@@ -23,8 +23,8 @@
           </template>
         </ApartmentsList>
       </Container>
-      <Container v-show="!isLoading">
-        <Pagination class="homepage__pagination" />
+      <Container>
+        <Pagination v-show="!isLoading" class="homepage__pagination" />
       </Container>
     </SectionWithHeaderFooterSpaces>
   </main>
@@ -37,7 +37,7 @@ import Container from '../components/shared/Container.vue';
 import SectionWithHeaderFooterSpaces from '../components/shared/SectionWithHeader&FooterSpaces.vue';
 import MainTitle from '../components/shared/MainTitle.vue';
 import Loading from '../components/loaders/Loading.vue';
-import { mapState, mapActions } from 'vuex';
+import { mapState, mapActions, mapGetters } from 'vuex';
 import Button from '../components/Button.vue';
 import Pagination from '../components/apartment/Pagination.vue';
 
@@ -56,55 +56,37 @@ export default {
   },
   data() {
     return {
-      filters: {
-        city: '',
-        price: 0,
-      },
       isOpen: false,
     };
   },
+  created() {
+    this.getAllApartments();
+  },
   watch: {
-    currentPage() {
-      this.getAllApartments();
-    },
+    $route: 'getAllApartments',
   },
   computed: {
-    ...mapState('booking', ['isLoading', 'allApartments', 'currentPage']),
-
-    filteredApartments() {
-      return this.filterByCityName(
-        this.filterByPrice(this.allApartments.apartments)
-      );
-    },
+    ...mapState('booking', ['isLoading', 'allApartments']),
   },
   methods: {
     ...mapActions('booking', ['getApartmentsList']),
 
-    filter({ city, price, isOpen }) {
-      this.filters.city = city;
-      this.filters.price = price;
+    filter({ isOpen }) {
       this.isOpen = isOpen;
-    },
-    filterByCityName(apartments) {
-      return apartments.filter(apartment => {
-        if (!this.filters.city) return apartments;
-
-        return apartment.location.city === this.filters.city;
-      });
-    },
-    filterByPrice(apartments) {
-      return apartments.filter(apartment => {
-        if (!this.filters.price) return apartments;
-
-        return apartment.price >= this.filters.price;
-      });
     },
     filterOpener() {
       this.isOpen = true;
     },
     async getAllApartments() {
+      const params = {
+        page: this.$route.query.page,
+        limit: this.$route.query.limit,
+        city: this.$route.query.city,
+        price: this.$route.query.price,
+      };
+
       try {
-        await this.getApartmentsList();
+        await this.getApartmentsList(params);
       } catch (error) {
         console.log(error);
       }

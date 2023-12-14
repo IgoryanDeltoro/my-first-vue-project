@@ -10,14 +10,17 @@ const initialState = {
   orders: [],
   apartment: {},
   isLoading: false,
-  currentPage: 1,
-  limitItems: 4,
 };
 
 export default {
   namespaced: true,
   state: { ...initialState },
-  getters: {},
+  getters: {
+    getApartmentsCount(state) {
+      const { apartmentsCount } = state.allApartments;
+      return apartmentsCount ? apartmentsCount : 0;
+    },
+  },
   mutations: {
     SET_APARTMENTS_LIST(state, payload) {
       state.allApartments = payload;
@@ -40,12 +43,9 @@ export default {
     },
   },
   actions: {
-    async getApartmentsList({ state, commit }) {
+    async getApartmentsList({ state, commit }, payload) {
       commit('SET_LOADING');
-      const { data } = await getApartments({
-        page: state.currentPage,
-        limit: state.limitItems,
-      });
+      const { data } = await getApartments(payload);
       commit('SET_APARTMENTS_LIST', data);
       commit('UNSET_LOADING');
     },

@@ -4,7 +4,7 @@
       <Container>
         <Loading v-if="isLoading" />
         <div v-else class="apartment-page">
-          <ApartmentMainInfo :apartment="apartment" />
+          <ApartmentMainInfo  :apartment="apartment" />
           <div class="apartment-page__additional-info">
             <ApartmentsOwner
               class="apartment-page__owner"

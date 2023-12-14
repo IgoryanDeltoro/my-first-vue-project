@@ -13,8 +13,5 @@ app.use(router);
 app.use(store);
 app.use(Notifications);
 app.use(VueAwesomePaginate);
-
 store.dispatch('auth/loadDataFromLS');
-store.dispatch('booking/getApartmentsList');
-
 app.mount('#app');
