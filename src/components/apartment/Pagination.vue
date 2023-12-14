@@ -1,7 +1,8 @@
 <template>
   <div class="pagination-box">
     <vue-awesome-paginate
-      :total-items="20"
+      v-show="getApartmentsCount"
+      :total-items="getApartmentsCount"
       :items-per-page="4"
       :max-pages-shown="5"
       v-model="currentPage"
@@ -15,26 +16,40 @@
 </template>
 
 <script>
-import { mapState, mapMutations } from 'vuex';
-import { ref } from 'vue';
+import { mapGetters, mapState } from 'vuex';
 
 export default {
   name: 'Pagination',
   data() {
     return {
-      currentPage: ref(1),
+      currentPage: 1,
       limitItems: 4,
     };
   },
+  watch: {
+    $route: 'handleCurrentPage',
+    getApartmentsCount() {
+      this.currentPage = 1;
+    },
+  },
+  created() {
+    this.handleCurrentPage();
+  },
+  computed: {
+    ...mapGetters('booking', ['getApartmentsCount']),
+  },
   methods: {
-    ...mapMutations('booking', ['SET_CURRENT_PAGE']),
+    handleCurrentPage() {
+      if (this.$route.query?.page)
+        this.currentPage = Number(this.$route.query.page);
+    },
+    onClickHandler() {
+      const { city, price } = this.$route.query;
 
-    async onClickHandler() {
       this.$router.push({
         path: '',
-        query: { page: this.currentPage, limit: this.limitItems },
+        query: { page: this.currentPage, city, price },
       });
-      this.SET_CURRENT_PAGE({ page: this.currentPage, limit: this.limitItems });
     },
   },
 };
