@@ -1,7 +1,7 @@
 <template>
   <div class="pagination-box">
     <vue-awesome-paginate
-      v-show="getApartmentsCount"
+      v-show="getApartmentsCount>5"
       :total-items="getApartmentsCount"
       :items-per-page="4"
       :max-pages-shown="5"
