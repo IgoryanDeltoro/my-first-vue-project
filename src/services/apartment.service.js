@@ -1,7 +1,18 @@
 import axios from '../utils/axios';
 
-export const getApartments = ({ page, limit }) => {
-  return axios.get(`/apartments?page=${page}&limit=${limit}`);
+export const getApartments = (data) => {
+  let queryString = [];
+
+  if (data?.page) queryString.push(`page=${data.page}`);
+  if (data?.limit) queryString.push(`&limit=${data.limit}`);
+  if (data?.city) queryString.push(`&city=${data.city}`);
+  if (data?.price) queryString.push(`&price=${data.price}`);
+  const params = queryString.reduce(
+    (acc, el, idx) => (idx === 0 ? acc + `?${el}` : acc + el),
+    ''
+  );
+
+  return axios.get(`/apartments${params}`);
 };
 
 export const getApartmentById = id => {
