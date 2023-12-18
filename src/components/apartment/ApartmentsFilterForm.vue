@@ -24,7 +24,7 @@ import CustomSelect from '../shared/CustomSelect.vue';
 import { getCities } from '../../services/apartment.service';
 import { isRequired, charLimit } from '../../utils/validationRules';
 import CloseButton from '../CloseButton.vue';
-import { mapActions } from 'vuex';
+import { handleQueryString } from '../../utils/handleQueryString';
 
 export default {
   name: 'ApartmentsFilterForm',
@@ -48,26 +48,30 @@ export default {
       console.log(error);
     }
   },
+  watch: {
+    $route: 'handleCurrentFilter',
+  },
   computed: {
     rules() {
       return [isRequired, charLimit(5)];
     },
   },
   methods: {
+    handleCurrentFilter() {
+      if (this.$route.query) {
+        this.filters.city = this.$route.query.city;
+        this.filters.price = this.$route.query.price;
+      }
+    },
     handelSubmit() {
-      const { page, limit } = this.$route.query;
-
       this.$router.push({
         path: '',
-        query: {
-          ...this.filters,
-        },
+        query: handleQueryString(this.filters),
       });
 
       this.$emit('data', {
         isOpen: false,
       });
-
     },
   },
 };

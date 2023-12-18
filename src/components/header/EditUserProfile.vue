@@ -1,12 +1,12 @@
 <template>
-  <Form @:submit.prevent="handleSubmit" class="form">
-    <CloseButton class="form__close-btn" />
-    <div class="form__img-box">
-      <UserAvatar class="form__photo-img" :src="user.avatarURL" />
-      <label class="form__layout">
+  <Form @:submit.prevent="handleSubmit" class="form-profile">
+    <CloseButton class="form-profile__close-btn" />
+    <div class="form-profile__img-box">
+      <UserAvatar class="form-profile__photo-img" :src="user.avatarURL" />
+      <label class="form-profile__layout">
         <PlusIcon class="form__img" />
         <input
-          class="form__upload-input"
+          class="form-profile__upload-input"
           type="file"
           @change="onFileChanged($event)"
           accept="image/*"
@@ -16,10 +16,10 @@
     </div>
     <CustomInput
       v-model="userName"
-      class="form__input"
+      class="form-profile__input"
       placeholder="Edit name (optionally)"
     />
-    <Button :loading="isLoading" class="form__btn" type="submit">
+    <Button :loading="isLoading" class="form-profile__btn" type="submit">
       Submit
     </Button>
   </Form>
@@ -86,7 +86,7 @@ export default {
 </script>
 <style lang="scss" scoped>
 @import '../../assets/scss/index.scss';
-.form {
+.form-profile {
   position: absolute;
   top: -1px;
   right: -1px;
