@@ -10,6 +10,7 @@ const initialState = {
   orders: [],
   apartment: {},
   isLoading: false,
+  itemsLimit: 4,
 };
 
 export default {
@@ -20,6 +21,10 @@ export default {
       const { apartmentsCount } = state.allApartments;
       return apartmentsCount ? apartmentsCount : 0;
     },
+    getItemsLimit(state){
+      return  state.itemsLimit;
+
+    }
   },
   mutations: {
     SET_APARTMENTS_LIST(state, payload) {
@@ -41,11 +46,20 @@ export default {
     UNSET_LOADING(state) {
       state.isLoading = false;
     },
+    SET_ITEMS_LIMIT(state) {
+      const viewWidth = window.innerWidth;
+      if (viewWidth <= 1199) state.itemsLimit = 4;
+      if (viewWidth >= 1200) state.itemsLimit = 6;
+    },
   },
   actions: {
     async getApartmentsList({ state, commit }, payload) {
+      commit('SET_ITEMS_LIMIT');
       commit('SET_LOADING');
-      const { data } = await getApartments(payload);
+      const { data } = await getApartments({
+        ...payload,
+        limit: state.itemsLimit,
+      });
       commit('SET_APARTMENTS_LIST', data);
       commit('UNSET_LOADING');
     },
