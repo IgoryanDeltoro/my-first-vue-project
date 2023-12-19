@@ -1,16 +1,27 @@
 <template>
   <form @submit.prevent="handelSubmit" class="form">
     <CustomSelect class="form__select" :items="cities" v-model="filters.city" />
+    <CustomSelect
+      class="form__select"
+      :items="[
+        { value: '', label: 'By rating', selected: true },
+        1,
+        2,
+        3,
+        4,
+        5,
+      ]"
+      v-model="filters.rating"
+    />
     <CloseButton class="form__close-btn" />
     <CustomInput
       class="form__input"
       name="name"
       type="number"
       v-model="filters.price"
-      error-message="this field is empty"
       :placeholder="'Price, from'"
-      :rules="rules"
     />
+   
     <Button class="form__button" type="submit" :outline="false"
       >Selection of house</Button
     >
@@ -61,6 +72,7 @@ export default {
       if (this.$route.query) {
         this.filters.city = this.$route.query.city;
         this.filters.price = this.$route.query.price;
+        this.filters.rating = this.$route.query.rating;
       }
     },
     handelSubmit() {
@@ -83,13 +95,13 @@ export default {
 .form {
   display: flex;
 
-  @include max-width(767px) {
+  @include max-width(1199px) {
     flex-direction: column;
     position: absolute;
     width: 280px;
     padding: 55px 20px;
-    top: 75px;
-    right: 15px;
+    top: -1px;
+    right:-1px;
     border: 2px solid $main-color;
     background-color: $white-color;
     z-index: 100;
@@ -119,7 +131,7 @@ export default {
     }
   }
 
-  @include tablet {
+  @include desktop {
     margin-bottom: 40px;
 
     &__select {
