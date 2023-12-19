@@ -1,4 +1,4 @@
-@include max-width(767px) {
+@include max-width(1199px) {
     .form.closed {
         position: absolute;
         width: 1px;
@@ -12,7 +12,7 @@
         overflow: hidden;
     }
 }
-@include tablet {
+@include desktop {
     .close-button.form__close-btn {
         position: absolute;
         width: 1px;
