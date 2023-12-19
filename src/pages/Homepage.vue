@@ -2,13 +2,15 @@
   <main class="homepage">
     <SectionWithHeaderFooterSpaces>
       <Container>
-        <Button class="homepage__filter-btn" @click="filterOpener"
-          >filter</Button
-        >
-        <ApartmentsFilterForm
-          :class="isOpen ? 'opened' : 'closed'"
-          @data="filter"
-        />
+        <div class="homepage__filter">
+          <Button class="homepage__filter-btn" @click="filterOpener"
+            >filter
+          </Button>
+          <ApartmentsFilterForm
+            :class="isOpen ? 'opened' : 'closed'"
+            @data="filter"
+          />
+        </div>
       </Container>
       <Loading v-if="isLoading" />
       <Container v-else>
@@ -83,6 +85,7 @@ export default {
         limit: this.$route.query.limit,
         city: this.$route.query.city,
         price: this.$route.query.price,
+        rating: this.$route.query.rating,
       };
 
       try {
@@ -98,14 +101,17 @@ export default {
 <style lang="scss" scoped>
 @import '../assets/scss/index.scss';
 .homepage {
-  &__filter-btn {
-    display: block;
-    position: absolute;
-    top: 75px;
-    right: 15px;
+  &__filter {
+    position: relative;
+    margin-bottom: 20px;
+    
+    &-btn {
+      display: block;
+      margin-left: auto;
 
-    @include tablet {
-      opacity: 0;
+      @include desktop {
+        opacity: 0;
+      }
     }
   }
 
