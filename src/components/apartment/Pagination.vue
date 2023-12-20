@@ -45,12 +45,15 @@ export default {
         this.currentPage = Number(this.$route.query.page);
     },
     onClickHandler() {
-      const queryStr = this.$route.query;
       const queries = handleQueryString(this.$route.query);
 
       this.$router.push({
         path: '',
-        query: { ...queries, page: this.currentPage },
+        query: {
+          ...queries,
+          page: this.currentPage,
+          limit: this.getItemsLimit,
+        },
       });
     },
   },
