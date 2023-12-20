@@ -21,10 +21,9 @@ export default {
       const { apartmentsCount } = state.allApartments;
       return apartmentsCount ? apartmentsCount : 0;
     },
-    getItemsLimit(state){
-      return  state.itemsLimit;
-
-    }
+    getItemsLimit(state) {
+      return state.itemsLimit;
+    },
   },
   mutations: {
     SET_APARTMENTS_LIST(state, payload) {
@@ -54,8 +53,8 @@ export default {
   },
   actions: {
     async getApartmentsList({ state, commit }, payload) {
-      commit('SET_ITEMS_LIMIT');
       commit('SET_LOADING');
+      commit('SET_ITEMS_LIMIT');
       const { data } = await getApartments({
         ...payload,
         limit: state.itemsLimit,
