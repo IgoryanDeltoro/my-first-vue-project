@@ -80,18 +80,20 @@ export default {
       this.isOpen = true;
     },
     async getAllApartments() {
-      const params = {
-        page: this.$route.query.page,
-        limit: this.$route.query.limit,
-        city: this.$route.query.city,
-        price: this.$route.query.price,
-        rating: this.$route.query.rating,
-      };
+      if (!this.$route.params.id) {
+        const params = {
+          page: this.$route.query.page,
+          limit: this.$route.query.limit,
+          city: this.$route.query.city,
+          price: this.$route.query.price,
+          rating: this.$route.query.rating,
+        };
 
-      try {
-        await this.getApartmentsList(params);
-      } catch (error) {
-        console.log(error);
+        try {
+          await this.getApartmentsList(params);
+        } catch (error) {
+          console.log(error);
+        }
       }
     },
   },
@@ -104,7 +106,7 @@ export default {
   &__filter {
     position: relative;
     margin-bottom: 20px;
-    
+
     &-btn {
       display: block;
       margin-left: auto;
