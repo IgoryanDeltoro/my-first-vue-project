@@ -9,7 +9,7 @@
       :imgSrc="apartment.imgUrl"
       :id="apartment.id"
       :key="apartment.id"
-      :class="{ centered: index === activeIndex }"
+      :class="{ centered: index <= activeIndex }"
     />
   </div>
 </template>
@@ -45,28 +45,15 @@ export default {
   methods: {
     handleScroll() {
       const windowHeight = window.innerHeight;
-      const center = windowHeight / 3;
+      const center = windowHeight / 2;
       const elements = [...this.$el.parentNode.childNodes[5].children];
 
       elements.map((item, index) => {
         const rect = item.getBoundingClientRect();
         const elementCenter = rect.top + rect.height / 2;
 
-        if (index < 2) {
-          if (elementCenter > 0 && elementCenter < center + 150) {
-            this.activeIndex = index;
-          }
-        } else if (index >= 2 && index <= elements.length) {
-          if (elementCenter >= center && elementCenter <= center + center) {
-            this.activeIndex = index;
-          }
-        } else if (index > elements.length) {
-          if (
-            elementCenter >= center + center &&
-            elementCenter <= windowHeight - 150
-          ) {
-            this.activeIndex = index;
-          }
+        if (elementCenter < center + windowHeight / 3) {
+          this.activeIndex = index;
         }
       });
     },
