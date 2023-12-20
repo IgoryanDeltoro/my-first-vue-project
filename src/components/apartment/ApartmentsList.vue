@@ -56,11 +56,11 @@ export default {
           if (elementCenter > 0 && elementCenter < center + 150) {
             this.activeIndex = index;
           }
-        } else if (index >= 2 && index <= elements.length - 2) {
+        } else if (index >= 2 && index <= elements.length) {
           if (elementCenter >= center && elementCenter <= center + center) {
             this.activeIndex = index;
           }
-        } else if (index > elements.length - 2) {
+        } else if (index > elements.length) {
           if (
             elementCenter >= center + center &&
             elementCenter <= windowHeight - 150

@@ -21,7 +21,7 @@
       v-model="filters.price"
       :placeholder="'Price, from'"
     />
-   
+
     <Button class="form__button" type="submit" :outline="false"
       >Selection of house</Button
     >
@@ -101,7 +101,7 @@ export default {
     width: 280px;
     padding: 55px 20px;
     top: -1px;
-    right:-1px;
+    right: -1px;
     border: 2px solid $main-color;
     background-color: $white-color;
     z-index: 100;
