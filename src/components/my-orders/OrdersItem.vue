@@ -144,32 +144,27 @@ export default {
     width: 25px;
     height: 25px;
   }
-
   @include max-width(767px) {
     &.centered &__delete-btn {
       opacity: 1;
       color: $main-color;
     }
-
     &.centered {
       transform: scale(1.05);
       box-shadow: $box-shadow-out;
     }
   }
-
   @include tablet {
     &:hover &__delete-btn {
       opacity: 1;
       color: $main-color;
     }
-
     &:hover {
       transform: scale(1.05);
       box-shadow: $box-shadow-out;
     }
   }
 }
-
 @keyframes pulse-bg {
   0% {
     background-color: #ddd;
