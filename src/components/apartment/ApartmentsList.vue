@@ -7,9 +7,9 @@
       :price="apartment.price"
       :rating="apartment.rating"
       :imgSrc="apartment.imgUrl"
+      :city="apartment.location.city"
       :id="apartment.id"
       :key="apartment.id"
-      :class="{ centered: index <= activeIndex }"
     />
   </div>
 </template>
@@ -33,29 +33,6 @@ export default {
     items: {
       type: Array,
       default: () => [],
-    },
-  },
-  mounted() {
-    window.addEventListener('scroll', this.handleScroll);
-    this.handleScroll();
-  },
-  beforeDestroy() {
-    window.removeEventListener('scroll', this.handleScroll);
-  },
-  methods: {
-    handleScroll() {
-      const windowHeight = window.innerHeight;
-      const center = windowHeight / 2;
-      const elements = [...this.$el.parentNode.childNodes[5].children];
-
-      elements.map((item, index) => {
-        const rect = item.getBoundingClientRect();
-        const elementCenter = rect.top + rect.height / 2;
-
-        if (elementCenter < center + windowHeight / 3) {
-          this.activeIndex = index;
-        }
-      });
     },
   },
 };

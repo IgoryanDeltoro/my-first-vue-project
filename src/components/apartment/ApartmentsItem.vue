@@ -5,9 +5,12 @@
         <img :src="imgSrc" alt="" class="apartment-item__img" />
       </Skelton>
       <div class="apartment-item__content">
-        <p class="apartment-item__description">{{ description }}</p>
+        <p class="apartment-item__description">
+          {{ description }}
+        </p>
         <div>
           <div class="apartment-item__rating">
+            <span class="apartment-item__location">{{ city }}</span>
             <StarRating :rating="rating" />
           </div>
           <p class="apartment-item__price">
@@ -51,6 +54,10 @@ export default {
       type: String,
       default: '',
     },
+    city: {
+      type: String,
+      default: '',
+    },
     id: {
       type: String,
       required: true,
@@ -62,23 +69,19 @@ export default {
 <style lang="scss" scoped>
 @import '../../assets/scss/index.scss';
 .apartment-item {
+  box-shadow: $cards-box-shadow;
   @include max-width(767px) {
     width: 100%;
-    height: 200px;
   }
-  @include tablet {
+  @include min-max-width(768px, 1199px) {
     width: 350px;
-    height: 196px;
   }
-
   @include min-max-width(768px, 1199px) {
     flex-basis: calc((100% - 30px) / 2);
   }
-
   @include desktop {
     flex-basis: calc((100% - 2 * 30px) / 3);
   }
-
   &__inner {
     position: relative;
     width: 100%;
@@ -86,68 +89,84 @@ export default {
   }
   &__skeleton {
     width: 100%;
-    height: 100%;
+    height: 200px;
   }
   &__img {
     width: 100%;
-    height: 100%;
+    height: 200px;
     object-fit: cover;
   }
-  &__description {
-    color: #fff;
-    font-size: 16px;
-    font-weight: 500;
-    margin-bottom: 20px;
-    line-height: 1.2;
-    height: calc(1em * 1.2 * 4);
-    overflow: hidden;
-  }
   &__content {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    position: absolute;
-    widows: 100%;
-    height: 100%;
-    transition: opacity 0.4s;
     text-align: left;
     line-height: 1.2;
-    background: rgba(15, 29, 45, 0.7);
-    cursor: pointer;
-    opacity: 0;
-    top: 0;
-    left: 0;
 
-    @include max-width(767px) {
-      padding: 30px;
+    @include max-width(1199px) {
+      padding: 10px;
     }
-    @include tablet {
+    @include desktop {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: absolute;
+      widows: 100%;
+      height: 100%;
+      cursor: pointer;
+      opacity: 0;
+      top: 0;
+      left: 0;
       padding: 20px;
+      transition: opacity 0.4s;
+      background: rgba(15, 29, 45, 0.7);
     }
-
-    .centered & {
-      @include max-width(767px) {
-        opacity: 1;
-      }
-    }
-
     &:hover {
       @include tablet {
         opacity: 1;
       }
     }
   }
+  &__description {
+    display: none;
+
+    @include desktop {
+      display: block;
+      font-size: 16px;
+      font-weight: 500;
+      margin-bottom: 20px;
+      line-height: 1.2;
+      height: calc(1em * 1.2 * 4);
+      color: #fff;
+      overflow: hidden;
+    }
+  }
+  &__location {
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 1.2;
+    @include desktop {
+      display: none;
+    }
+  }
   &__rating {
-    margin-bottom: 20px;
+    @include max-width(1199px) {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+    @include desktop {
+      margin-bottom: 20px;
+    }
   }
   &__price {
-    color: #fff;
     font-size: 20px;
     font-weight: 700;
     line-height: 1.2;
 
     &--desc {
       font-weight: 500;
+    }
+    @include desktop {
+      color: #fff;
     }
   }
   &__link {
