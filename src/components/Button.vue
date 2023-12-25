@@ -76,6 +76,7 @@ export default {
   padding: 8px 15px;
   transition: background-color $transition-time, color $transition-time;
   font-family: inherit;
+  margin-inline: 0;
 
   &:hover {
     background: $white-color;
