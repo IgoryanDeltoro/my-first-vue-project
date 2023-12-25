@@ -21,7 +21,7 @@
       v-model="filters.price"
       :placeholder="'Price, from'"
     />
-
+    <Datepicker />
     <Button class="form__button" type="submit" :outline="false"
       >Selection of house</Button
     >
@@ -36,6 +36,7 @@ import { getCities } from '../../services/apartment.service';
 import { isRequired, charLimit } from '../../utils/validationRules';
 import CloseButton from '../CloseButton.vue';
 import { handleQueryString } from '../../utils/handleQueryString';
+import Datepicker from '../shared/Datepicker.vue';
 
 export default {
   name: 'ApartmentsFilterForm',
@@ -44,9 +45,11 @@ export default {
     CustomInput,
     Button,
     CloseButton,
+    Datepicker,
   },
   data() {
     return {
+      date: null,
       cities: [],
       filters: {},
     };
