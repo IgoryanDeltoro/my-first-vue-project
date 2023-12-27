@@ -21,7 +21,7 @@
       v-model="filters.price"
       :placeholder="'Price, from'"
     />
-    <Datepicker />
+    <Datepicker class="form__date-picker" />
     <Button class="form__button" type="submit" :outline="false"
       >Selection of house</Button
     >
@@ -49,7 +49,6 @@ export default {
   },
   data() {
     return {
-      date: null,
       cities: [],
       filters: {},
     };
@@ -136,21 +135,13 @@ export default {
 
   @include desktop {
     margin-bottom: 40px;
+    border: 1px solid $main-color;
 
-    &__select {
-      width: 220px;
-      margin-right: 30px;
-    }
-
+    &__select,
+    &__input,
+    &__date-picker,
     &__button {
-      margin-left: auto;
-    }
-    &__input {
-      width: 220px;
-      margin-right: auto;
-    }
-    &__button {
-      width: 220px;
+      flex-basis: calc(100% / 5);
     }
   }
 }
