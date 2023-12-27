@@ -22,9 +22,19 @@ export default {
       date: [],
     };
   },
+  watch: {
+    date() {
+      this.handelDate();
+    },
+  },
   computed: {
     handlePickedDate() {
-      return this.date?.[0]? 'picked-date' : '';
+      return this.date?.[0] ? 'picked-date' : '';
+    },
+  },
+  methods: {
+    handelDate() {
+      this.$store.commit('booking/SET_DATE', this.date);
     },
   },
 };
@@ -33,8 +43,13 @@ export default {
 <style lang="scss">
 @import '../../assets/scss/index.scss';
 .mx-datepicker.mx-datepicker-range[data-v-5001c7fe] {
-  width: 100%;
-  margin-bottom: 30px;
+  @include max-width(1199px) {
+    width: 100%;
+    margin-bottom: 30px;
+  }
+  @include desktop {
+    width: 220px;
+  }
 
   & .mx-input[type='text'] {
     width: 100%;

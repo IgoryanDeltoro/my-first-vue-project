@@ -11,6 +11,7 @@ const initialState = {
   apartment: {},
   isLoading: false,
   itemsLimit: 4,
+  date: {},
 };
 
 export default {
@@ -50,6 +51,22 @@ export default {
       if (viewWidth <= 1199) state.itemsLimit = 4;
       if (viewWidth >= 1200) state.itemsLimit = 6;
     },
+    SET_DATE(state, payload) {
+      const date = {
+        from: payload[0].toLocaleDateString(),
+        to: payload[1].toLocaleDateString(),
+      };
+      state.date = date;
+      window.localStorage.setItem('order-date', JSON.stringify(date));
+
+    },   
+    GET_DATE_FROM_LOCAL_STORAGE(state) {
+      const date = window.localStorage.getItem('order-date');
+      if (date) {
+        const result = JSON.parse(date);
+        state.date = result;
+      }
+    },
   },
   actions: {
     async getApartmentsList({ state, commit }, payload) {
@@ -81,12 +98,18 @@ export default {
       commit('SET_APARTMENT_BY_ID', result.data);
       commit('UNSET_LOADING');
     },
-    async bookApartment({ commit }, payload) {
+    async bookApartment({ state, commit }, { apartmentId }) {
       commit('SET_LOADING');
-      await bookApartment(payload);
-      const { data } = await getApartmentById(payload.apartmentId);
+      await bookApartment({
+        apartment: apartmentId,
+        date: state.date,
+      });
+      const { data } = await getApartmentById(apartmentId);
       commit('SET_APARTMENT_BY_ID', data);
       commit('UNSET_LOADING');
+    },
+    loadDateFromLS({ commit }) {
+      commit('GET_DATE_FROM_LOCAL_STORAGE');
     },
   },
 };
