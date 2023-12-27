@@ -72,6 +72,7 @@ export default {
   color: $white-color;
   cursor: pointer;
   min-width: 100px;
+  height: 44px;
   border: 1px solid transparent;
   padding: 8px 15px;
   transition: background-color $transition-time, color $transition-time;
@@ -81,7 +82,7 @@ export default {
   &:hover {
     background: $white-color;
     color: $main-color;
-    border: 1px solid $main-color;
+    border: 2px solid $main-color;
   }
 
   &--outline {
