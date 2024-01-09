@@ -21,7 +21,7 @@
       v-model="filters.price"
       :placeholder="'Price, from'"
     />
-    <Datepicker class="form__date-picker" />
+    <Datepicker class="form__date-picker" text="Date: From and to" />
     <Button class="form__button" type="submit" :outline="false"
       >Selection of house</Button
     >
@@ -36,8 +36,8 @@ import { getCities } from '../../services/apartment.service';
 import { isRequired, charLimit } from '../../utils/validationRules';
 import CloseButton from '../CloseButton.vue';
 import { handleQueryString } from '../../utils/handleQueryString';
-import Datepicker from '../shared/Datepicker.vue';
-
+import Datepicker from '../Datepicker.vue';
+import { mapState } from 'vuex';
 export default {
   name: 'ApartmentsFilterForm',
   components: {
@@ -65,6 +65,8 @@ export default {
     $route: 'handleCurrentFilter',
   },
   computed: {
+    ...mapState('booking', ['date']),
+
     rules() {
       return [isRequired, charLimit(5)];
     },
@@ -80,7 +82,11 @@ export default {
     handelSubmit() {
       this.$router.push({
         path: '',
-        query: handleQueryString(this.filters),
+        query: handleQueryString({
+          ...this.filters,
+          from: this.date.from,
+          to: this.date.to,
+        }),
       });
 
       this.$emit('data', {
@@ -130,6 +136,16 @@ export default {
 
     &.opened {
       opacity: 1;
+    }
+  }
+
+  &__date-picker {
+    @include max-width(1199px) {
+      width: 100%;
+      margin-bottom: 30px;
+    }
+    @include desktop {
+      width: 220px;
     }
   }
 
