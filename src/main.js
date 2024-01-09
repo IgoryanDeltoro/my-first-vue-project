@@ -14,6 +14,4 @@ app.use(store);
 app.use(Notifications);
 app.use(VueAwesomePaginate);
 store.dispatch('auth/loadDataFromLS');
-store.dispatch('booking/loadDateFromLS');
-
 app.mount('#app');
