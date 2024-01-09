@@ -1,7 +1,7 @@
 <template>
   <div class="app">
     <div class="content">
-      <notifications />
+      <notifications :duration="5000"/>
       <Header />
       <router-view></router-view>
       <ReviewsModal v-if="isShowModal" :rating="rating" />
