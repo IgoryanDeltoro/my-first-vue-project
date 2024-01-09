@@ -13,15 +13,18 @@
       <Button
         class="article__btn"
         @click="handleBooking"
-        v-if="!apartment.ordered.isOrdered"
         :loading="isLoading"
         :outline="false"
         >Book</Button
       >
-      <p class="article__attention" v-else>
-        Sorry, but this apartment has already been booked!
-      </p>
     </div>
+    <Modal
+      @closeModal="e => (isModalOpened = e)"
+      @subMit="bookingQuery"
+      v-show="isModalOpened"
+    >
+      <Datepicker class="article__date-picker" text="Please, select a date to book this apartment"/>
+    </Modal>
   </article>
 </template>
 
@@ -31,7 +34,9 @@ import Container from '../shared/Container.vue';
 import Button from '../Button.vue';
 import MainTitle from '../shared/MainTitle.vue';
 import Skeleton from '../Skeleton.vue';
-import { mapActions, mapState } from 'vuex';
+import Modal from '../Modal.vue';
+import Datepicker from '../Datepicker.vue';
+import { mapActions, mapState, mapMutations, mapGetters } from 'vuex';
 
 export default {
   name: 'ApartmentMainInfo',
@@ -41,6 +46,13 @@ export default {
     Button,
     MainTitle,
     Skeleton,
+    Modal,
+    Datepicker,
+  },
+  data() {
+    return {
+      isModalOpened: false,
+    };
   },
   props: {
     apartment: {
@@ -50,11 +62,20 @@ export default {
   },
   computed: {
     ...mapState('booking', ['isLoading']),
+    ...mapGetters('booking', ['isPickedDate']),
   },
   methods: {
     ...mapActions('booking', ['bookApartment']),
+    ...mapMutations('booking', ['UNSET_LOADING']),
 
-    async handleBooking() {
+    handleBooking() {
+      if (this.isPickedDate) {
+        this.bookingQuery();
+      } else {
+        this.isModalOpened = true;
+      }
+    },
+    async bookingQuery() {
       try {
         const { id } = this.$route.params;
         const body = {
@@ -69,10 +90,11 @@ export default {
           title: 'You have successful order',
         });
       } catch (error) {
+        this.UNSET_LOADING();
         this.$notify({
           type: 'error',
           title: 'Booking error',
-          text: error.message,
+          text: error.response.data.message,
         });
       }
     },
@@ -143,6 +165,9 @@ export default {
     font-weight: 500;
     line-height: 1.2;
     color: $error-color;
+  }
+  &__date-picker {
+    width: 100%;
   }
 }
 </style>
