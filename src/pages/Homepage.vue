@@ -87,6 +87,8 @@ export default {
           city: this.$route.query.city,
           price: this.$route.query.price,
           rating: this.$route.query.rating,
+          from: this.$route.query.from,
+          to: this.$route.query.to,
         };
 
         try {

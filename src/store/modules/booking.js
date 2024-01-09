@@ -25,6 +25,9 @@ export default {
     getItemsLimit(state) {
       return state.itemsLimit;
     },
+    isPickedDate(state) {
+      return Boolean(state.date?.from);
+    },
   },
   mutations: {
     SET_APARTMENTS_LIST(state, payload) {
@@ -57,15 +60,9 @@ export default {
         to: payload[1].toLocaleDateString(),
       };
       state.date = date;
-      window.localStorage.setItem('order-date', JSON.stringify(date));
-
-    },   
-    GET_DATE_FROM_LOCAL_STORAGE(state) {
-      const date = window.localStorage.getItem('order-date');
-      if (date) {
-        const result = JSON.parse(date);
-        state.date = result;
-      }
+    },
+    SET_ERROR(state, payload) {
+      state.error = payload;
     },
   },
   actions: {
@@ -107,9 +104,6 @@ export default {
       const { data } = await getApartmentById(apartmentId);
       commit('SET_APARTMENT_BY_ID', data);
       commit('UNSET_LOADING');
-    },
-    loadDateFromLS({ commit }) {
-      commit('GET_DATE_FROM_LOCAL_STORAGE');
     },
   },
 };
