@@ -18,13 +18,6 @@
         >Book</Button
       >
     </div>
-    <Modal
-      @closeModal="e => (isModalOpened = e)"
-      @subMit="bookingQuery"
-      v-show="isModalOpened"
-    >
-      <Datepicker class="article__date-picker" text="Please, select a date to book this apartment"/>
-    </Modal>
   </article>
 </template>
 
@@ -34,8 +27,6 @@ import Container from '../shared/Container.vue';
 import Button from '../Button.vue';
 import MainTitle from '../shared/MainTitle.vue';
 import Skeleton from '../Skeleton.vue';
-import Modal from '../Modal.vue';
-import Datepicker from '../Datepicker.vue';
 import { mapActions, mapState, mapMutations, mapGetters } from 'vuex';
 
 export default {
@@ -46,18 +37,21 @@ export default {
     Button,
     MainTitle,
     Skeleton,
-    Modal,
-    Datepicker,
-  },
-  data() {
-    return {
-      isModalOpened: false,
-    };
   },
   props: {
     apartment: {
       type: Object,
       required: true,
+    },
+  },
+  inject: {
+    div: {
+      default: null,
+    },
+  },
+  watch: {
+    bookingQuery() {
+      this.handleBooking();
     },
   },
   computed: {
@@ -72,7 +66,7 @@ export default {
       if (this.isPickedDate) {
         this.bookingQuery();
       } else {
-        this.isModalOpened = true;
+        this.div.showModal();
       }
     },
     async bookingQuery() {
@@ -165,9 +159,6 @@ export default {
     font-weight: 500;
     line-height: 1.2;
     color: $error-color;
-  }
-  &__date-picker {
-    width: 100%;
   }
 }
 </style>

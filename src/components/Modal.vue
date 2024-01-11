@@ -48,7 +48,8 @@ export default {
     },
 
     handleSubmit() {
-      if (this.isPickedDate) this.$emit('subMit');
+      if (this.isPickedDate) {
+      }
     },
   },
 };

@@ -1,66 +1,48 @@
 <template>
-  <div class="modal">
-    <div class="modal__wrapper">
-      <div class="modal__container">
-        <div class="modal__header">
-          <Logo color="black" />
-          <CloseButton class="modal__close-btn" @click="closeModal" />
-        </div>
-        <div class="modal__content">
-          <div class="modal__user-content">
-            <UserAvatar
-              class="modal__user-avatar"
-              :src="getUserData.avatarURL"
-            />
-            <div>
-              <span class="modal__user-name">{{ this.getUserData.name }}</span>
-              <p>
-                Reviews are visible to everyone and contain information about
-                your account. Public data includes your name, profile photo.
-              </p>
-            </div>
-          </div>
-          <div class="modal__box">
-            <div class="modal__descr">Please, rate this apartment</div>
-          </div>
-          <StarRating
-            class="modal__rating"
-            title="Press to leave feedback"
-            starSize="30px"
-            gap="25px"
-            :rating="rating"
-          />
-          <textarea
-            class="modal__comment-text"
-            rows="2"
-            cols
-            v-model="message"
-            maxlength="500"
-            placeholder="Describe your impressions (optionally)"
-          ></textarea>
-          <span class="modal__comment-quantity">{{
-            `${wordsQuantity}/500`
-          }}</span>
-        </div>
-        <div class="modal__footer">
-          <Button type="button" @click="handleSubmit" class="modal__btn"
-            >Send</Button
-          >
-        </div>
+  <div class="feed-back">
+    <div class="feed-back__user-content">
+      <UserAvatar class="feed-back__user-avatar" :src="getUserData.avatarURL" />
+      <div>
+        <span class="feed-back__user-name">{{ this.getUserData.name }}</span>
+        <p>
+          Reviews are visible to everyone and contain information about your
+          account. Public data includes your name, profile photo.
+        </p>
       </div>
     </div>
+    <div class="feed-back__box">
+      <div class="feed-back__descr">Please, rate this apartment</div>
+    </div>
+    <StarRating
+      class="feed-back__rating"
+      title="Press to leave feedback"
+      starSize="30px"
+      gap="25px"
+      :rating="rating"
+    />
+    <textarea
+      class="feed-back__comment-text"
+      rows="2"
+      cols
+      v-model="message"
+      maxlength="500"
+      placeholder="Describe your impressions (optionally)"
+    ></textarea>
+    <span class="feed-back__comment-quantity">{{
+      `${wordsQuantity}/500`
+    }}</span>
   </div>
 </template>
 
 <script>
-import Button from '../../Button.vue';
-import Logo from '../../Logo.vue';
-import StarRating from '../../StarRating.vue';
+import Button from '../Button.vue';
+import Logo from '../Logo.vue';
+import StarRating from '../StarRating.vue';
 import { mapGetters, mapActions } from 'vuex';
-import UserAvatar from '../../shared/UserAvatar.vue';
-import CloseButton from '../../CloseButton.vue';
+import UserAvatar from '../shared/UserAvatar.vue';
+import CloseButton from '../CloseButton.vue';
 export default {
-  name: 'ReviewsModal',
+  name: 'FeedBack',
   components: {
     StarRating,
     UserAvatar,
@@ -125,17 +107,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '../../../assets/scss/index.scss';
-.modal {
-  position: fixed;
-  z-index: 9998;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: $overlay-color;
-  display: table;
-
+@import '../../assets/scss/index.scss';
+.feed-back {
   &__wrapper {
     display: table-cell;
     vertical-align: middle;
@@ -240,43 +213,34 @@ export default {
 
     &::before {
       content: '';
+
+      @include tablet {
+        width: 25%;
+      }
       position: absolute;
       display: block;
-
       top: 50%;
       transform: translate(0, -50%);
       left: 0;
-      width: 25%;
+
       height: 1px;
       border: 1px solid $gray-border-color;
     }
 
     &::after {
       content: '';
+
+      @include tablet {
+        width: 25%;
+      }
       position: absolute;
       display: block;
-
       top: 50%;
       right: 0;
       transform: translate(0, -50%);
-      width: 25%;
       height: 1px;
       border: 1px solid $gray-border-color;
     }
-  }
-  .active &__container {
-    animation: $scale-animation;
-  }
-}
-
-@keyframes scale {
-  0% {
-    opacity: 0;
-    -moz-transform: scale(0.8);
-  }
-  100% {
-    opacity: 1;
-    -moz-transform: scale(1);
   }
 }
 </style>

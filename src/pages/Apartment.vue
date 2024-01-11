@@ -4,7 +4,7 @@
       <Container>
         <Loading v-if="isLoading" />
         <div v-else class="apartment-page">
-          <ApartmentMainInfo  :apartment="apartment" />
+          <ApartmentMainInfo :apartment="apartment" />
           <div class="apartment-page__additional-info">
             <ApartmentsOwner
               class="apartment-page__owner"
@@ -16,6 +16,14 @@
             />
           </div>
         </div>
+        <Modal @closeModal="closeModal" v-show="isModalOpened">
+          <Datepicker
+            v-if="identifier"
+            class="apartment-page__date-picker"
+            text="Please, select a date to book this apartment"
+          />
+          <FeedBack v-else="identifier" :rating="rating" />
+        </Modal>
       </Container>
     </SectionWithHeaderFooterSpaces>
   </main>
@@ -28,7 +36,11 @@ import ApartmentsOwner from '../components/apartment/ApartmentsOwner.vue';
 import Reviews from '../components/reviews/Reviews.vue';
 import Loading from '../components/loaders/Loading.vue';
 import SectionWithHeaderFooterSpaces from '../components/shared/SectionWithHeader&FooterSpaces.vue';
-import { mapActions, mapState } from 'vuex';
+import FeedBack from '../components/reviews/FeedBack.vue';
+import Modal from '../components/Modal.vue';
+import Datepicker from '../components/Datepicker.vue';
+
+import { mapActions, mapState, mapGetters } from 'vuex';
 
 export default {
   name: 'ApartmentPage',
@@ -38,14 +50,45 @@ export default {
     ApartmentsOwner,
     Reviews,
     Loading,
+    Modal,
+    Datepicker,
+    FeedBack,
     SectionWithHeaderFooterSpaces,
   },
-  methods: {
-    ...mapActions('booking', ['getApartmentById']),
+  data() {
+    return {
+      isModalOpened: false,
+      rating: 0,
+      identifier: false,
+    };
+  },
+  provide() {
+    return {
+      div: this,
+    };
   },
   computed: {
     ...mapState('booking', ['apartment', 'isLoading']),
+    ...mapGetters('booking', ['isPickedDate']),
   },
+  methods: {
+    ...mapActions('booking', ['getApartmentById']),
+
+    showModal(value, rating) {
+      if (rating) {
+        this.isModalOpened = value;
+        this.rating = rating;
+      } else {
+        this.isModalOpened = true;
+        this.identifier = true;
+      }
+    },
+    closeModal() {
+      this.isModalOpened = false;
+      this.identifier = false;
+    },
+  },
+
   async created() {
     try {
       const { id } = this.$route.params;
@@ -100,6 +143,9 @@ export default {
     @include min-max-width(768px, 1199px) {
       width: 350px;
     }
+  }
+  &__date-picker {
+    width: 100%;
   }
 }
 </style>
