@@ -47,6 +47,7 @@ export default {
       required: true,
     },
   },
+
   computed: {
     totalReviews() {
       const total = this.reviews.reduce(

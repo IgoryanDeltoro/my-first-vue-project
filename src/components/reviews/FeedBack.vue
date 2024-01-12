@@ -61,14 +61,23 @@ export default {
       type: Number,
       default: 0,
     },
+    fetcher: {
+      type: String,
+      default: '',
+    },
   },
   inject: {
     div: {
       default: null,
     },
   },
+  watch: {
+    fetcher(value) {
+      if (value === 'leaveFeedBack') this.leaveFeedBack();
+    },
+  },
   computed: {
-    ...mapGetters('auth', ['isLoggedIn', 'getUserData']),
+    ...mapGetters('auth', ['getUserData']),
 
     wordsQuantity() {
       return this.message.length;
@@ -77,12 +86,7 @@ export default {
   methods: {
     ...mapActions('booking', ['createReview']),
 
-    closeModal() {
-      this.isModalOpened = false;
-      this.div.showModal(this.isModalOpened);
-    },
-
-    async handleSubmit() {
+    async leaveFeedBack() {
       if (this.rating !== 0) {
         try {
           const { id } = this.$route.params;
@@ -92,7 +96,6 @@ export default {
           };
 
           await this.createReview({ id, data });
-          this.closeModal();
         } catch (error) {
           this.$notify({
             type: 'error',

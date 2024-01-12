@@ -33,23 +33,12 @@ export default {
     Logo,
     CloseButton,
   },
-  data() {
-    return {
-      isModalOpened: true,
-    };
-  },
-  computed: {
-    ...mapGetters('booking', ['isPickedDate']),
-  },
   methods: {
     closeModal() {
-      this.isModalOpened = false;
       this.$emit('closeModal', false);
     },
-
     handleSubmit() {
-      if (this.isPickedDate) {
-      }
+      this.$emit('subMit');
     },
   },
 };

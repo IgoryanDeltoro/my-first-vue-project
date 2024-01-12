@@ -4,7 +4,7 @@
       <Container>
         <Loading v-if="isLoading" />
         <div v-else class="apartment-page">
-          <ApartmentMainInfo :apartment="apartment" />
+          <ApartmentMainInfo :apartment="apartment" :fetcher="fetcher" />
           <div class="apartment-page__additional-info">
             <ApartmentsOwner
               class="apartment-page__owner"
@@ -16,13 +16,17 @@
             />
           </div>
         </div>
-        <Modal @closeModal="closeModal" v-show="isModalOpened">
+        <Modal
+          @closeModal="closeModal"
+          @subMit="handleModalSubmit"
+          v-show="isModalOpened"
+        >
           <Datepicker
             v-if="identifier"
             class="apartment-page__date-picker"
             text="Please, select a date to book this apartment"
           />
-          <FeedBack v-else="identifier" :rating="rating" />
+          <FeedBack v-else="identifier" :rating="rating" :fetcher="fetcher" />
         </Modal>
       </Container>
     </SectionWithHeaderFooterSpaces>
@@ -60,6 +64,7 @@ export default {
       isModalOpened: false,
       rating: 0,
       identifier: false,
+      fetcher: null,
     };
   },
   provide() {
@@ -76,7 +81,7 @@ export default {
 
     showModal(value, rating) {
       if (rating) {
-        this.isModalOpened = value;
+        this.isModalOpened = value; 
         this.rating = rating;
       } else {
         this.isModalOpened = true;
@@ -86,6 +91,18 @@ export default {
     closeModal() {
       this.isModalOpened = false;
       this.identifier = false;
+    },
+    handleModalSubmit() {
+      if (this.identifier) {
+        if (this.isPickedDate) {
+          this.fetcher = 'makeBooking';
+          this.isModalOpened = false;
+          this.identifier = false;
+        }
+      } else {
+        this.fetcher = 'leaveFeedBack';
+        this.isModalOpened = false;
+      }
     },
   },
 

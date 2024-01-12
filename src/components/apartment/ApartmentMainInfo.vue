@@ -2,7 +2,7 @@
   <article class="article">
     <div class="article__content">
       <MainTitle class="article__title">{{ apartment.title }}</MainTitle>
-      <StarRating :rating="apartment.rating" />
+      <StarRating :rating="apartment.rating" title="Press to leave feedback" />
     </div>
     <Skeleton class="article__skelton">
       <img class="article__img" :src="apartment.imgUrl" alt="apartment" />
@@ -43,6 +43,10 @@ export default {
       type: Object,
       required: true,
     },
+    fetcher: {
+      type: String,
+      default: '',
+    },
   },
   inject: {
     div: {
@@ -50,8 +54,8 @@ export default {
     },
   },
   watch: {
-    bookingQuery() {
-      this.handleBooking();
+    fetcher(value) {
+      if (value === 'makeBooking') this.bookingQuery();
     },
   },
   computed: {
